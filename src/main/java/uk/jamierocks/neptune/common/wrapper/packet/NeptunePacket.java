@@ -21,28 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.mixin.nbt;
+package uk.jamierocks.neptune.common.wrapper.packet;
 
-import net.canarymod.api.nbt.FloatTag;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagFloat;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import net.canarymod.api.packet.Packet;
 
-@Mixin(NBTTagFloat.class)
-@Implements(@Interface(iface = FloatTag.class, prefix = "tag$"))
-public abstract class MixinNBTTagFloat extends NBTBase.NBTPrimitive {
+public class NeptunePacket implements Packet {
 
-    @Shadow
-    private float data;
+    private final net.minecraft.network.Packet packet;
 
-    public float tag$getValue() {
-        return data;
+    public NeptunePacket(net.minecraft.network.Packet packet) {
+        this.packet = packet;
     }
 
-    public void tag$setValue(float value) {
-        data = value;
+    @Override
+    public int getPacketSize() {
+        return 0;
+    }
+
+    @Override
+    public int getPacketId() {
+        return 0;
+    }
+
+    public net.minecraft.network.Packet getPacket() {
+        return this.packet;
     }
 }

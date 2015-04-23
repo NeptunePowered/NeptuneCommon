@@ -33,6 +33,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(NBTBase.NBTPrimitive.class)
 @Implements(@Interface(iface = PrimitiveTag.class, prefix = "tag$"))
 public abstract class MixinNBTPrimitive extends NBTBase {
+
     @Shadow
     public abstract long getLong();
 
@@ -50,7 +51,7 @@ public abstract class MixinNBTPrimitive extends NBTBase {
 
     @Shadow
     public abstract float getFloat();
-    
+
     public long tag$getLongValue() {
         return getLong();
     }

@@ -31,9 +31,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(NBTBase.class)
 public abstract class MixinNBTBase implements BaseTag {
+
     @Shadow
     public abstract byte getId();
-    
+
     @Override
     public byte getTypeId() {
         return getId();

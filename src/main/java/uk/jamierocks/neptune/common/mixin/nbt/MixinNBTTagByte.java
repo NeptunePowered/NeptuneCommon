@@ -33,7 +33,8 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(NBTTagByte.class)
 @Implements(@Interface(iface = ByteTag.class, prefix = "tag$"))
-public abstract class MixinNBTTagByte extends NBTBase.NBTPrimitive  {
+public abstract class MixinNBTTagByte extends NBTBase.NBTPrimitive {
+
     @Shadow
     private byte data;
 

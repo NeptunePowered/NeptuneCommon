@@ -12,6 +12,9 @@
         "nbt.MixinNBTTagIntArray",
         "nbt.MixinNBTTagLong",
         "nbt.MixinNBTTagShort",
-        "nbt.MixinNBTTagString"
+        "nbt.MixinNBTTagString",
+        "potion.MixinPotion",
+        "stats.MixinAchievement",
+        "stats.MixinStatBase"
     ]
 }

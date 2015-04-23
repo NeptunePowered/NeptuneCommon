@@ -34,6 +34,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(NBTTagString.class)
 @Implements(@Interface(iface = StringTag.class, prefix = "tag$"))
 public abstract class MixinNBTTagString extends NBTBase {
+
     @Shadow
     private String data;
 

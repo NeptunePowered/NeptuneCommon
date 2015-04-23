@@ -42,54 +42,55 @@ import java.util.Set;
 @Mixin(NBTTagCompound.class)
 @Implements(@Interface(iface = CompoundTag.class, prefix = "tag$"))
 public abstract class MixinNBTTagCompound extends NBTBase {
+
     @Shadow
     private Map tagMap;
-    
+
     @Shadow
     public abstract int getInteger(String key);
-    
+
     @Shadow
     public abstract void setTag(String key, NBTBase value);
-    
+
     @Shadow
     public abstract void setByte(String key, byte value);
-    
+
     @Shadow
     public abstract void setShort(String key, short value);
-    
+
     @Shadow
     public abstract void setInteger(String key, int value);
-    
+
     @Shadow
     public abstract void setLong(String key, long value);
-    
+
     @Shadow
     public abstract void setFloat(String key, float value);
-    
+
     @Shadow
     public abstract void setDouble(String key, double value);
-    
+
     @Shadow
     public abstract void setString(String key, String value);
-    
+
     @Shadow
     public abstract void setByteArray(String key, byte[] value);
-    
+
     @Shadow
     public abstract void setIntArray(String key, int[] value);
-    
+
     @Shadow
     public abstract void setBoolean(String key, boolean value);
-    
+
     @Shadow
     public abstract NBTBase getTag(String key);
-    
+
     @Shadow
     public abstract boolean hasKey(String key, int type);
-    
+
     @Shadow
     public abstract NBTTagCompound getCompoundTag(String key);
-    
+
     public Collection<BaseTag> tag$values() {
         Collection<BaseTag> values = new ArrayList<BaseTag>();
         for (NBTBase tag : (Collection<NBTBase>) tagMap) {

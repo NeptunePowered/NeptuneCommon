@@ -21,28 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.mixin.nbt;
+package uk.jamierocks.neptune.common.mixin.potion;
 
-import net.canarymod.api.nbt.FloatTag;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagFloat;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
+import net.canarymod.api.potion.PotionEffectType;
+import net.minecraft.potion.Potion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(NBTTagFloat.class)
-@Implements(@Interface(iface = FloatTag.class, prefix = "tag$"))
-public abstract class MixinNBTTagFloat extends NBTBase.NBTPrimitive {
+@Mixin(Potion.class)
+public abstract class MixinPotion implements net.canarymod.api.potion.Potion {
 
     @Shadow
-    private float data;
+    public int id;
 
-    public float tag$getValue() {
-        return data;
+    @Shadow
+    private boolean isBadEffect;
+
+    @Override
+    public int getID() {
+        return id;
     }
 
-    public void tag$setValue(float value) {
-        data = value;
+    @Shadow
+    public abstract String getName();
+
+    @Override
+    public PotionEffectType getEffectType() {
+        return PotionEffectType.fromName(getName());
     }
+
+    @Override
+    public boolean isBad() {
+        return isBadEffect;
+    }
+
+    @Shadow
+    public abstract double getEffectiveness();
+
+    @Shadow
+    public abstract boolean isUsable();
+
+    @Shadow
+    public abstract boolean isInstant();
 }
