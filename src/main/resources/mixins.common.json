@@ -1,5 +1,5 @@
 {
-    "package": "uk.jamierocks.neptune.common.mixins",
+    "package": "uk.jamierocks.neptune.common.mixin",
     "mixins": [
         "nbt.MixinNBTBase",
         "nbt.MixinNBTPrimitive",

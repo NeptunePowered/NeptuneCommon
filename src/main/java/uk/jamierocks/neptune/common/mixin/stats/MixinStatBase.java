@@ -21,27 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.mixins.nbt;
+package uk.jamierocks.neptune.common.mixin.stats;
 
-import net.canarymod.api.nbt.ByteTag;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagByte;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
+import net.canarymod.api.statistics.Stat;
+import net.minecraft.stats.StatBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(NBTTagByte.class)
-@Implements(@Interface(iface = ByteTag.class, prefix = "tag$"))
-public abstract class MixinNBTTagByte extends NBTBase.NBTPrimitive  {
-    @Shadow
-    private byte data;
+@Mixin(StatBase.class)
+public abstract class MixinStatBase implements Stat {
 
-    public byte tag$getValue() {
-        return data;
+    @Shadow
+    public String statId;
+
+    @Shadow
+    public boolean isIndependent;
+
+    @Shadow(prefix = "base$")
+    public abstract String base$toString();
+
+    @Override
+    public String getId() {
+        return statId;
     }
 
-    public void tag$setValue(byte value) {
-        data = value;
+    @Override
+    public String getName() {
+        return base$toString();
+    }
+
+    @Override
+    public boolean isIndependent() {
+        return isIndependent;
     }
 }

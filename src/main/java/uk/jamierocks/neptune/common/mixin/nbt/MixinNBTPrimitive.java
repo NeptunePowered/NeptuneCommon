@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.mixins.nbt;
+package uk.jamierocks.neptune.common.mixin.nbt;
 
 import net.canarymod.api.nbt.PrimitiveTag;
 import net.minecraft.nbt.NBTBase;

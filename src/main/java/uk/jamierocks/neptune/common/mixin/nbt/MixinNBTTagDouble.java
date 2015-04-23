@@ -21,27 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.mixins.nbt;
+package uk.jamierocks.neptune.common.mixin.nbt;
 
-import net.canarymod.api.nbt.IntTag;
+import net.canarymod.api.nbt.DoubleTag;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.NBTTagDouble;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(NBTTagInt.class)
-@Implements(@Interface(iface = IntTag.class, prefix = "tag$"))
-public abstract class MixinNBTTagInt extends NBTBase.NBTPrimitive {
+@Mixin(NBTTagDouble.class)
+@Implements(@Interface(iface = DoubleTag.class, prefix = "tag$"))
+public abstract class MixinNBTTagDouble extends NBTBase.NBTPrimitive {
     @Shadow
-    private int data;
-
-    public int tag$getValue() {
+    private double data;
+    
+    public double tag$getValue() {
         return data;
     }
 
-    public void tag$setValue(int value) {
+    public void tag$setValue(double value) {
         data = value;
     }
 }

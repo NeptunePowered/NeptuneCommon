@@ -21,27 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.mixins.nbt;
+package uk.jamierocks.neptune.common.mixin.stats;
 
-import net.canarymod.api.nbt.StringTag;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagString;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
+import net.minecraft.stats.Achievement;
+import net.minecraft.stats.IStatType;
+import net.minecraft.stats.StatBase;
+import net.minecraft.util.IChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(NBTTagString.class)
-@Implements(@Interface(iface = StringTag.class, prefix = "tag$"))
-public abstract class MixinNBTTagString extends NBTBase {
-    @Shadow
-    private String data;
+@Mixin(Achievement.class)
+public abstract class MixinAchievement extends StatBase implements net.canarymod.api.statistics.Achievement {
 
-    public String tag$getValue() {
-        return data;
+    public MixinAchievement(String p_i45307_1_, IChatComponent p_i45307_2_, IStatType p_i45307_3_) {
+        super(p_i45307_1_, p_i45307_2_, p_i45307_3_);
     }
 
-    public void tag$setValue(String value) {
-        data = value;
+    @Shadow
+    private String achievementDescription;
+
+    @Shadow
+    public Achievement parentAchievement;
+
+    @Shadow
+    private boolean isSpecial;
+
+    @Override
+    public String getDescription() {
+        return achievementDescription;
+    }
+
+    @Override
+    public net.canarymod.api.statistics.Achievement getParent() {
+        return (net.canarymod.api.statistics.Achievement) parentAchievement;
+    }
+
+    @Override
+    public boolean isSpecial() {
+        return isSpecial;
     }
 }
