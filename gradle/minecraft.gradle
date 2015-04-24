@@ -1,0 +1,14 @@
+ext.common = project(':Common')
+ext.minecraftVersion = '1.8'
+
+apply from: common.file('gradle/java.gradle')
+
+minecraft {
+    if (project.ext.has('forgeVersion')) {
+        version = "$minecraftVersion-$forgeVersion"
+    } else {
+        version = minecraftVersion
+    }
+
+    mappings = 'snapshot_20150326'
+}

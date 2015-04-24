@@ -15,20 +15,10 @@ buildscript {
     }
 }
 apply plugin: 'net.minecrell.vanilla.base'
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-
-minecraft {
-    version = '1.8'
-    mappings = 'snapshot_20150326'
-}
+apply from: 'gradle/minecraft.gradle'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://repo.visualillusionsent.net/repository/public'
-    }
     maven {
         url 'http://repo.spongepowered.org/maven'
     }
@@ -37,8 +27,4 @@ repositories {
 dependencies {
     compile 'net.canarymod:CanaryLib:1.2.1-SNAPSHOT'
     compile 'org.spongepowered:mixin:0.1-SNAPSHOT'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
 }
