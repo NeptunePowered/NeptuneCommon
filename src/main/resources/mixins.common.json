@@ -16,6 +16,7 @@
         "potion.MixinPotion",
         "stats.MixinAchievement",
         "stats.MixinStatBase",
+        "village.MixinVillage",
         "world.biome.MixinBiomeGenBase",
         "world.chunk.MixinChunk"
     ]
