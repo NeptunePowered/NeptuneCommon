@@ -21,18 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common;
+package uk.jamierocks.neptune.common.wrapper.util;
 
-import net.canarymod.Canary;
-import uk.jamierocks.neptune.common.wrapper.factory.NeptuneFactory;
-import uk.jamierocks.neptune.common.wrapper.util.NeptuneJsonNBTUtility;
+import com.mojang.authlib.GameProfile;
+import net.canarymod.api.nbt.BaseTag;
+import net.canarymod.api.nbt.CompoundTag;
+import net.canarymod.util.JsonNBTUtility;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 
-public class Neptune extends Canary {
+public class NeptuneJsonNBTUtility implements JsonNBTUtility {
 
-    public Neptune() {
-        Canary.setCanary(this);
+    @Override
+    public BaseTag jsonToNBT(String rawJson) {
+        try {
+            return (BaseTag) JsonToNBT.getTagFromJson(rawJson);
+        } catch (NBTException e) {
+            return null;
+        }
+    }
 
-        this.jsonNBT = new NeptuneJsonNBTUtility();
-        this.factory = new NeptuneFactory();
+    @Override
+    public String baseTagToJSON(BaseTag baseTag) {
+        return null;
+    }
+
+    @Override
+    public GameProfile gameProfileFromNBT(CompoundTag tag) {
+        return NBTUtil.readGameProfileFromNBT(null); // TODO:
+    }
+
+    @Override
+    public CompoundTag gameProfileToNBT(GameProfile profile) {
+        return (CompoundTag) NBTUtil.writeGameProfile(new NBTTagCompound(), profile);
     }
 }

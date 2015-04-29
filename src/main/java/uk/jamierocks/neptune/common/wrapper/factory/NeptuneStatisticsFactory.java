@@ -21,18 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common;
+package uk.jamierocks.neptune.common.wrapper.factory;
 
-import net.canarymod.Canary;
-import uk.jamierocks.neptune.common.wrapper.factory.NeptuneFactory;
-import uk.jamierocks.neptune.common.wrapper.util.NeptuneJsonNBTUtility;
+import net.canarymod.api.factory.StatisticsFactory;
+import net.canarymod.api.statistics.Achievement;
+import net.canarymod.api.statistics.Stat;
+import net.minecraft.stats.StatList;
 
-public class Neptune extends Canary {
+public class NeptuneStatisticsFactory implements StatisticsFactory {
 
-    public Neptune() {
-        Canary.setCanary(this);
+    @Override
+    public Stat getStat(String nmsName) {
+        return (Stat) StatList.getOneShotStat(nmsName);
+    }
 
-        this.jsonNBT = new NeptuneJsonNBTUtility();
-        this.factory = new NeptuneFactory();
+    @Override
+    public Achievement getAchievement(String nmsName) {
+        if (StatList.getOneShotStat(nmsName) instanceof Achievement) {
+            return (Achievement) StatList.getOneShotStat(nmsName);
+        }
+        return null;
     }
 }
