@@ -17,6 +17,8 @@
         "potion.MixinPotionEffect",
         "stats.MixinAchievement",
         "stats.MixinStatBase",
+        "tileentity.MixinTileEntity",
+        "util.MixinAxisAlignedBB",
         "village.MixinVillage",
         "world.biome.MixinBiomeGenBase",
         "world.chunk.MixinChunk"

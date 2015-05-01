@@ -24,6 +24,8 @@
 package uk.jamierocks.neptune.common;
 
 import net.canarymod.Canary;
+import net.canarymod.database.DatabaseLoader;
+import net.canarymod.plugin.PluginLangLoader;
 import uk.jamierocks.neptune.common.wrapper.factory.NeptuneFactory;
 import uk.jamierocks.neptune.common.wrapper.util.NeptuneJsonNBTUtility;
 
@@ -31,6 +33,9 @@ public class Neptune extends Canary {
 
     public Neptune() {
         Canary.setCanary(this);
+
+        DatabaseLoader.load();
+        PluginLangLoader.load();
 
         this.jsonNBT = new NeptuneJsonNBTUtility();
         this.factory = new NeptuneFactory();

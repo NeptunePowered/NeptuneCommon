@@ -21,24 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package uk.jamierocks.neptune.common.wrapper.packet;
+package uk.jamierocks.neptune.common.util;
 
-import net.canarymod.api.packet.Packet;
-import uk.jamierocks.neptune.common.util.Wrapper;
+public class Wrapper<T> {
+    private final T handle;
 
-public class NeptunePacket extends Wrapper<net.minecraft.network.Packet> implements Packet {
-
-    public NeptunePacket(net.minecraft.network.Packet handle) {
-        super(handle);
+    public Wrapper(final T handle) {
+        this.handle = handle;
     }
 
-    @Override
-    public int getPacketSize() {
-        return 0;
-    }
-
-    @Override
-    public int getPacketId() {
-        return 0;
+    protected final T getHandle() {
+        return handle;
     }
 }
