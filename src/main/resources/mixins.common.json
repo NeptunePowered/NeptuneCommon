@@ -1,6 +1,8 @@
 {
     "package": "uk.jamierocks.neptune.common.mixin",
     "mixins": [
+        "item.MixinItem",
+        "item.MixinItemStack",
         "nbt.MixinNBTBase",
         "nbt.MixinNBTPrimitive",
         "nbt.MixinNBTTagByte",
