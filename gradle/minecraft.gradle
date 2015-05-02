@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-group = 'uk.jamierocks.neptune'
+group = 'org.neptunepowered'
 archivesBaseName = project.name.toLowerCase()
 
 sourceCompatibility = '1.6'
