@@ -1,5 +1,5 @@
 {
-    "package": "uk.jamierocks.neptune.common.mixin",
+    "package": "org.neptunepowered.common.mixin",
     "mixins": [
         "item.MixinItem",
         "item.MixinItemStack",
