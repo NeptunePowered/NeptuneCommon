@@ -23,9 +23,9 @@ __Note:__ If you do not have [Gradle] installed then use ./gradlew for Unix syst
 __For [Eclipse]__  
   1. Run `gradle setupDecompWorkspace --refresh-dependencies`  
   2. Run `gradle eclipse`
-  3. Import Sponge as an existing project (File > Import > General)
+  3. Import NeptuneCommon as an existing project (File > Import > General)
   4. Select the root folder for NeptuneCommon and make sure `Search for nested projects` is enabled
-  5. Check Sponge when it finishes building and click **Finish**
+  5. Check NeptuneCommon when it finishes building and click **Finish**
 
 __For [IntelliJ]__  
   1. Run `gradle setupDecompWorkspace --refresh-dependencies`  
@@ -34,7 +34,7 @@ __For [IntelliJ]__
 
 [Eclipse]: http://www.eclipse.org/
 [Gradle]: http://www.gradle.org/
-[Homepage]: http://neptune.jamierocks.uk/
+[Homepage]: http://www.neptunepowered.org/
 [IntelliJ]: http://www.jetbrains.com/idea/
 [Issues]: https://github.com/NeptunePowered/NeptuneCommon/issues
 [Java]: http://java.oracle.com/
