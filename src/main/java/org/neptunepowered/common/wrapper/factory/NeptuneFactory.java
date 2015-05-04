@@ -37,6 +37,7 @@ import net.canarymod.api.factory.StatisticsFactory;
 
 public class NeptuneFactory implements Factory {
 
+    private final ItemFactory itemFactory = new NeptuneItemFactory();
     private final PotionFactory potionFactory = new NeptunePotionFactory();
     private final NBTFactory nbtFactory = new NeptuneNBTFactory();
     private final PacketFactory packetFactory = new NeptunePacketFactory();
@@ -44,7 +45,7 @@ public class NeptuneFactory implements Factory {
 
     @Override
     public ItemFactory getItemFactory() {
-        return null;
+        return itemFactory;
     }
 
     @Override

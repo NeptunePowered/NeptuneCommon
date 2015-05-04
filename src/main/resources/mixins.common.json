@@ -17,6 +17,8 @@
         "nbt.MixinNBTTagString",
         "potion.MixinPotion",
         "potion.MixinPotionEffect",
+        "server.management.MixinServerConfigurationManager",
+        "server.MixinMinecraftServer",
         "stats.MixinAchievement",
         "stats.MixinStatBase",
         "tileentity.MixinTileEntity",
