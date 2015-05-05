@@ -25,6 +25,9 @@ package org.neptunepowered.common;
 
 import net.canarymod.Canary;
 import net.canarymod.database.DatabaseLoader;
+import net.canarymod.hook.HookExecutor;
+import net.canarymod.motd.MessageOfTheDay;
+import net.canarymod.plugin.DefaultPluginManager;
 import net.canarymod.plugin.PluginLangLoader;
 import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
@@ -38,6 +41,11 @@ public class Neptune extends Canary {
         PluginLangLoader.load();
 
         this.jsonNBT = new NeptuneJsonNBTUtility();
+        this.motd = new MessageOfTheDay();
+        this.hookExecutor = new HookExecutor();
         this.factory = new NeptuneFactory();
+        this.pluginManager = new DefaultPluginManager();
+
+        pluginManager.scanForPlugins(); // Scan for plugins
     }
 }

@@ -15,6 +15,7 @@
         "nbt.MixinNBTTagLong",
         "nbt.MixinNBTTagShort",
         "nbt.MixinNBTTagString",
+        "pathfinding.MixinPathNavigate",
         "potion.MixinPotion",
         "potion.MixinPotionEffect",
         "server.management.MixinServerConfigurationManager",
