@@ -24,6 +24,8 @@
         "stats.MixinStatBase",
         "tileentity.MixinTileEntity",
         "util.MixinAxisAlignedBB",
+        "util.MixinDamageSource",
+        "village.MixinMerchantRecipe",
         "village.MixinVillage",
         "world.biome.MixinBiomeGenBase",
         "world.chunk.MixinChunk"

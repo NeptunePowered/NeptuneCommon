@@ -24,6 +24,7 @@
 package org.neptunepowered.common.util;
 
 public class Wrapper<T> {
+
     private final T handle;
 
     public Wrapper(final T handle) {

@@ -41,11 +41,20 @@ public abstract class MixinItemStack implements Item {
     @Shadow private int itemDamage;
     @Shadow public int stackSize;
 
-    @Shadow public abstract boolean isItemEnchantable();
-    @Shadow public abstract boolean isItemEnchanted();
-    @Shadow public abstract ItemStack copy();
-    @Shadow public abstract int getMaxStackSize();
-    @Shadow public abstract void clearCustomName();
+    @Shadow
+    public abstract boolean isItemEnchantable();
+
+    @Shadow
+    public abstract boolean isItemEnchanted();
+
+    @Shadow
+    public abstract ItemStack copy();
+
+    @Shadow
+    public abstract int getMaxStackSize();
+
+    @Shadow
+    public abstract void clearCustomName();
 
     @Override
     public int getId() {

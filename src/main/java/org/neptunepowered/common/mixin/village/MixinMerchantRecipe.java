@@ -21,82 +21,91 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.tileentity;
+package org.neptunepowered.common.mixin.village;
 
+import net.canarymod.api.VillagerTrade;
+import net.canarymod.api.inventory.Item;
 import net.canarymod.api.nbt.CompoundTag;
-import net.canarymod.api.world.World;
-import net.canarymod.api.world.blocks.Block;
-import net.canarymod.api.world.blocks.TileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.village.MerchantRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(net.minecraft.tileentity.TileEntity.class)
-public abstract class MixinTileEntity implements TileEntity {
+@Mixin(MerchantRecipe.class)
+public abstract class MixinMerchantRecipe implements VillagerTrade {
 
-    @Shadow protected net.minecraft.block.Block blockType;
-    @Shadow protected net.minecraft.world.World worldObj;
-    @Shadow protected BlockPos pos;
-
-    @Shadow
-    public abstract void updateContainingBlockInfo();
+    @Shadow private ItemStack itemToBuy;
+    @Shadow private ItemStack secondItemToBuy;
+    @Shadow private ItemStack itemToSell;
+    @Shadow private int maxTradeUses;
 
     @Shadow
-    public abstract void readFromNBT(NBTTagCompound compound);
+    public abstract NBTTagCompound writeToTags();
 
     @Shadow
-    public abstract void writeToNBT(NBTTagCompound compound);
+    public abstract void readFromTags(NBTTagCompound p_77390_1_);
+
+    @Shadow
+    public abstract boolean isRecipeDisabled();
 
     @Override
-    public Block getBlock() {
-        return (Block) blockType;
+    public Item getBuyingOne() {
+        return (Item) itemToBuy;
     }
 
     @Override
-    public int getX() {
-        return pos.getX();
+    public void setBuyingOne(Item item) {
+        itemToBuy = (ItemStack) item;
     }
 
     @Override
-    public int getY() {
-        return pos.getY();
+    public Item getBuyingTwo() {
+        return (Item) secondItemToBuy;
     }
 
     @Override
-    public int getZ() {
-        return pos.getZ();
+    public void setBuyingTwo(Item item) {
+        secondItemToBuy = (ItemStack) item;
     }
 
     @Override
-    public World getWorld() {
-        return (World) worldObj;
+    public boolean requiresTwoItems() {
+        return secondItemToBuy != null;
     }
 
     @Override
-    public void update() {
-        updateContainingBlockInfo();
+    public Item getSelling() {
+        return (Item) itemToSell;
     }
 
     @Override
-    public CompoundTag getDataTag() {
-        return null;
+    public void setSelling(Item item) {
+        itemToSell = (ItemStack) item;
     }
 
     @Override
-    public CompoundTag getMetaTag() {
-        return null;
+    public void use() {
+        // TODO: Something fancy goes here.
     }
 
     @Override
-    public CompoundTag writeToTag(CompoundTag tag) {
-        NBTTagCompound mcTag = (NBTTagCompound) tag;
-        writeToNBT(mcTag);
-        return (CompoundTag) mcTag;
+    public void increaseMaxUses(int increase) {
+        maxTradeUses += increase;
+    }
+
+    @Override
+    public boolean isUsedUp() {
+        return isRecipeDisabled();
+    }
+
+    @Override
+    public CompoundTag getDataAsTag() {
+        return (CompoundTag) writeToTags();
     }
 
     @Override
     public void readFromTag(CompoundTag tag) {
-        readFromNBT((NBTTagCompound) tag);
+        readFromTags((NBTTagCompound) tag);
     }
 }

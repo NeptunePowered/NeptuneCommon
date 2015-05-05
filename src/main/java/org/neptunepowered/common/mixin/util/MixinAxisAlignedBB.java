@@ -38,10 +38,17 @@ public abstract class MixinAxisAlignedBB implements BoundingBox {
     @Shadow public double maxY;
     @Shadow public double maxZ;
 
-    @Shadow public abstract AxisAlignedBB shadow$contract(double x, double y, double z);
-    @Shadow public abstract AxisAlignedBB addCoord(double x, double y, double z);
-    @Shadow public abstract AxisAlignedBB shadow$offset(double x, double y, double z);
-    @Shadow public abstract AxisAlignedBB shadow$expand(double x, double y, double z);
+    @Shadow
+    public abstract AxisAlignedBB shadow$contract(double x, double y, double z);
+
+    @Shadow
+    public abstract AxisAlignedBB addCoord(double x, double y, double z);
+
+    @Shadow
+    public abstract AxisAlignedBB shadow$offset(double x, double y, double z);
+
+    @Shadow
+    public abstract AxisAlignedBB shadow$expand(double x, double y, double z);
 
     @Override
     public double getMinX() {

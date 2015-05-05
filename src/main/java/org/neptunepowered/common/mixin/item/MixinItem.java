@@ -33,7 +33,8 @@ public abstract class MixinItem implements BaseItem {
 
     @Shadow protected int maxStackSize;
 
-    @Shadow protected abstract Item shadow$setMaxDamage(int maxDamageIn);
+    @Shadow
+    protected abstract Item shadow$setMaxDamage(int maxDamageIn);
 
     @Override
     public int getMaxStackSize() {
