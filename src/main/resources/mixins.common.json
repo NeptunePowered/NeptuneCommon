@@ -19,6 +19,7 @@
         "potion.MixinPotion",
         "potion.MixinPotionEffect",
         "server.management.MixinServerConfigurationManager",
+        "network.MixinNetHandlerStatusServer",
         "server.MixinMinecraftServer",
         "stats.MixinAchievement",
         "stats.MixinStatBase",
