@@ -1,6 +1,8 @@
 {
     "package": "org.neptunepowered.common.mixin",
     "mixins": [
+        "event.MixinClickEvent",
+        "event.MixinHoverEvent",
         "item.MixinItem",
         "item.MixinItemStack",
         "nbt.MixinNBTBase",
