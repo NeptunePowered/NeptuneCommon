@@ -46,10 +46,8 @@ import net.canarymod.logger.Logman;
 import net.canarymod.tasks.ServerTask;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
-import net.minecraft.world.WorldType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.Inject;
 
 import java.awt.GraphicsEnvironment;
 import java.util.List;
@@ -64,7 +62,8 @@ public abstract class MixinMinecraftServer implements Server {
     @Shadow public long[] tickTimeArray;
     @Shadow private ServerConfigurationManager serverConfigManager;
 
-    @Shadow public abstract void initiateShutdown();
+    @Shadow
+    public abstract void initiateShutdown();
 
     @Override
     public String getHostname() {

@@ -21,17 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.util;
+package org.neptunepowered.common.wrapper.chat;
 
-public class Wrapper<T> {
+import net.canarymod.api.chat.ChatFormatting;
+import net.minecraft.util.EnumChatFormatting;
+import org.neptunepowered.common.util.Wrapper;
 
-    private final T handle;
+public class NeptuneChatFormatting extends Wrapper<EnumChatFormatting> implements ChatFormatting {
 
-    public Wrapper(final T handle) {
-        this.handle = handle;
+    public NeptuneChatFormatting(EnumChatFormatting handle) {
+        super(handle);
     }
 
-    public final T getHandle() {
-        return handle;
+    @Override
+    public char getFormattingCode() {
+        return getHandle().formattingCode;
+    }
+
+    @Override
+    public boolean isFormat() {
+        return getHandle().isFancyStyling();
+    }
+
+    @Override
+    public boolean isColor() {
+        return getHandle().isColor();
+    }
+
+    @Override
+    public String getName() {
+        return getHandle().getFriendlyName();
     }
 }

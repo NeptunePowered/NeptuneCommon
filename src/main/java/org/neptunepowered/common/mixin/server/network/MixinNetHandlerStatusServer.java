@@ -23,12 +23,12 @@
  */
 package org.neptunepowered.common.mixin.server.network;
 
-import net.canarymod.hook.CancelableHook;
 import net.canarymod.hook.system.ServerListPingHook;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.status.client.C00PacketServerQuery;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.NetHandlerStatusServer;
+import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,9 +44,10 @@ public class MixinNetHandlerStatusServer {
 
     @Inject(method = "processServerQuery", at = @At("HEAD"))
     public void onProcessServerQuery(C00PacketServerQuery packetIn) {
-        CancelableHook serverListPingHook =
-                new ServerListPingHook((InetSocketAddress) networkManager.getRemoteAddress(), 0, null, 0, null, 0, 0,
-                        server.getServerStatusResponse().getFavicon(), null).call();
+        ServerListPingHook serverListPingHook =
+                (ServerListPingHook) new ServerListPingHook((InetSocketAddress) networkManager.getRemoteAddress(), 0,
+                        null, 0, new NeptuneChatComponent(server.getServerStatusResponse().getServerDescription()),
+                        0, 0, server.getServerStatusResponse().getFavicon(), null).call();
         if (serverListPingHook.isCanceled()) {
             return;
         }

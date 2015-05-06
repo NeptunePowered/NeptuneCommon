@@ -25,6 +25,7 @@
         "stats.MixinStatBase",
         "tileentity.MixinTileEntity",
         "util.MixinAxisAlignedBB",
+        "util.MixinChatStyle",
         "util.MixinDamageSource",
         "village.MixinMerchantRecipe",
         "village.MixinVillage",
