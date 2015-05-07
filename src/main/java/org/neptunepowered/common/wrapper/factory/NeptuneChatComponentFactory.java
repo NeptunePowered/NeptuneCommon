@@ -32,8 +32,11 @@ import net.canarymod.api.chat.HoverEventAction;
 import net.canarymod.api.factory.ChatComponentFactory;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;
 import org.neptunepowered.common.wrapper.chat.NeptuneChatFormatting;
+import org.neptunepowered.common.wrapper.chat.NeptuneClickEventAction;
+import org.neptunepowered.common.wrapper.chat.NeptuneHoverEventAction;
 
 public class NeptuneChatComponentFactory implements ChatComponentFactory {
 
@@ -54,7 +57,7 @@ public class NeptuneChatComponentFactory implements ChatComponentFactory {
 
     @Override
     public ChatComponent deserialize(String json) {
-        return null;
+        return new NeptuneChatComponent(IChatComponent.Serializer.jsonToComponent(json));
     }
 
     @Override
@@ -179,56 +182,58 @@ public class NeptuneChatComponentFactory implements ChatComponentFactory {
 
     @Override
     public ClickEvent newClickEvent(ClickEventAction action, String value) {
-        return null;
+        return (ClickEvent) new net.minecraft.event.ClickEvent(((NeptuneClickEventAction) action).getHandle(), value);
     }
 
     @Override
     public ClickEventAction getClickEventActionByName(String name) {
-        return null;
+        return new NeptuneClickEventAction(net.minecraft.event.ClickEvent.Action.getValueByCanonicalName(name));
     }
 
     @Override
     public ClickEventAction getOpenURL() {
-        return null;
+        return new NeptuneClickEventAction(net.minecraft.event.ClickEvent.Action.OPEN_URL);
     }
 
     @Override
     public ClickEventAction getOpenFile() {
-        return null;
+        return new NeptuneClickEventAction(net.minecraft.event.ClickEvent.Action.OPEN_FILE);
     }
 
     @Override
     public ClickEventAction getRunCommand() {
-        return null;
+        return new NeptuneClickEventAction(net.minecraft.event.ClickEvent.Action.RUN_COMMAND);
     }
 
     @Override
     public ClickEventAction getSuggestCommand() {
-        return null;
+        return new NeptuneClickEventAction(net.minecraft.event.ClickEvent.Action.SUGGEST_COMMAND);
     }
 
     @Override
     public HoverEvent newHoverEvent(HoverEventAction action, ChatComponent value) {
-        return null;
+        return (HoverEvent) new net.minecraft.event.HoverEvent(((NeptuneHoverEventAction) action).getHandle(),
+                ((NeptuneChatComponent) value)
+                        .getHandle());
     }
 
     @Override
     public HoverEventAction getHoverEventActionByName(String name) {
-        return null;
+        return new NeptuneHoverEventAction(net.minecraft.event.HoverEvent.Action.getValueByCanonicalName(name));
     }
 
     @Override
     public HoverEventAction getShowText() {
-        return null;
+        return new NeptuneHoverEventAction(net.minecraft.event.HoverEvent.Action.SHOW_TEXT);
     }
 
     @Override
     public HoverEventAction getShowAchievement() {
-        return null;
+        return new NeptuneHoverEventAction(net.minecraft.event.HoverEvent.Action.SHOW_ACHIEVEMENT);
     }
 
     @Override
     public HoverEventAction getShowItem() {
-        return null;
+        return new NeptuneHoverEventAction(net.minecraft.event.HoverEvent.Action.SHOW_ITEM);
     }
 }

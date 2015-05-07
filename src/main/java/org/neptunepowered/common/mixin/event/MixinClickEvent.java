@@ -25,6 +25,7 @@ package org.neptunepowered.common.mixin.event;
 
 import net.canarymod.api.chat.ClickEvent;
 import net.canarymod.api.chat.ClickEventAction;
+import org.neptunepowered.common.wrapper.chat.NeptuneClickEventAction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -35,17 +36,7 @@ public abstract class MixinClickEvent implements ClickEvent {
 
     @Override
     public ClickEventAction getAction() {
-        return new ClickEventAction() {
-            @Override
-            public boolean allowedInChat() {
-                return action.shouldAllowInChat();
-            }
-
-            @Override
-            public String getName() {
-                return action.getCanonicalName();
-            }
-        };
+        return new NeptuneClickEventAction(action);
     }
 
     @Shadow
