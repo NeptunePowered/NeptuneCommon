@@ -37,6 +37,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.net.InetSocketAddress;
+import java.util.Arrays;
 
 @Mixin(NetHandlerStatusServer.class)
 public class MixinNetHandlerStatusServer {
@@ -49,7 +50,11 @@ public class MixinNetHandlerStatusServer {
         ServerListPingHook hook =
                 (ServerListPingHook) new ServerListPingHook((InetSocketAddress) networkManager.getRemoteAddress(), 0,
                         null, 0, new NeptuneChatComponent(server.getServerStatusResponse().getServerDescription()),
-                        0, 0, server.getServerStatusResponse().getFavicon(), null).call();
+                        server.getServerStatusResponse().getPlayerCountData().getOnlinePlayerCount(),
+                        server.getServerStatusResponse()
+                                .getPlayerCountData().getMaxPlayers(), server.getServerStatusResponse()
+                        .getFavicon(),
+                        Arrays.asList(server.getServerStatusResponse().getPlayerCountData().getPlayers())).call();
         if (hook.isCanceled()) {
             networkManager.closeChannel(null);
             return;
