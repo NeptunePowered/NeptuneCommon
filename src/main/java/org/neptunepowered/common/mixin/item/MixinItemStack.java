@@ -51,10 +51,10 @@ public abstract class MixinItemStack implements Item {
     public abstract ItemStack copy();
 
     @Shadow
-    public abstract int getMaxStackSize();
+    public abstract void clearCustomName();
 
     @Shadow
-    public abstract void clearCustomName();
+    public abstract ItemStack setStackDisplayName(String displayName);
 
     @Override
     public int getId() {
@@ -88,12 +88,12 @@ public abstract class MixinItemStack implements Item {
 
     @Override
     public int getMaxAmount() {
-        return getMaxStackSize();
+        return item.getItemStackLimit();
     }
 
     @Override
     public void setMaxAmount(int amount) {
-
+        item.setMaxStackSize(amount);
     }
 
     @Override
@@ -164,14 +164,12 @@ public abstract class MixinItemStack implements Item {
     @Shadow
     public abstract boolean hasDisplayName();
 
-    @Override
-    public String getDisplayName() {
-        return null;
-    }
+    @Shadow
+    public abstract String getDisplayName();
 
     @Override
     public void setDisplayName(String name) {
-
+        setStackDisplayName(name);
     }
 
     @Override
