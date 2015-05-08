@@ -20,6 +20,7 @@
         "pathfinding.MixinPathNavigate",
         "potion.MixinPotion",
         "potion.MixinPotionEffect",
+        "server.dedicated.MixinDedicatedServer",
         "server.management.MixinServerConfigurationManager",
         "server.network.MixinNetHandlerStatusServer",
         "server.MixinMinecraftServer",
