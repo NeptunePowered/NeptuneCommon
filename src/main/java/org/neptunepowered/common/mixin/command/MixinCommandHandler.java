@@ -21,25 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.server.dedicated;
+package org.neptunepowered.common.mixin.command;
 
-import net.canarymod.Canary;
-import net.minecraft.server.dedicated.DedicatedServer;
-import org.neptunepowered.common.Neptune;
+import com.google.common.collect.Lists;
+import net.minecraft.command.CommandHandler;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(DedicatedServer.class)
-public class MixinDedicatedServer {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-    @Inject(method = "startServer()Z", at = @At(value = "INVOKE",
-            target = "loadAllWorlds(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/WorldType;"
-                    + "Ljava/lang/String;)V"))
-    public void onStartServer(CallbackInfoReturnable<Boolean> ci) {
-        Canary.enableEarlyPlugins();
-        ((Neptune)Canary.instance()).lateInitialisation();
-        Canary.enableLatePlugins();
+@Mixin(CommandHandler.class)
+public class MixinCommandHandler {
+
+    @Shadow private Set commandSet;
+
+    @Overwrite
+    public List getPossibleCommands(ICommandSender sender) {
+        ArrayList arraylist = Lists.newArrayList();
+        Iterator iterator = this.commandSet.iterator();
+
+        // TODO: Canary commands
+
+        while (iterator.hasNext()) {
+            ICommand icommand = (ICommand)iterator.next();
+
+            if (icommand.canCommandSenderUseCommand(sender)) {
+                arraylist.add(icommand);
+            }
+        }
+
+        return arraylist;
     }
 }

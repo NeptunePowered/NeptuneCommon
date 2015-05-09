@@ -24,8 +24,13 @@
 package org.neptunepowered.common;
 
 import net.canarymod.Canary;
+import net.canarymod.commandsys.CommandDependencyException;
+import net.canarymod.commandsys.CommandList;
+import net.canarymod.commandsys.CommandManager;
+import net.canarymod.commandsys.DuplicateCommandException;
 import net.canarymod.database.DatabaseLoader;
 import net.canarymod.hook.HookExecutor;
+import net.canarymod.motd.CanaryMessageOfTheDayListener;
 import net.canarymod.motd.MessageOfTheDay;
 import net.canarymod.plugin.DefaultPluginManager;
 import net.canarymod.plugin.PluginLangLoader;
@@ -33,6 +38,8 @@ import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
 
 public class Neptune extends Canary {
+
+    private boolean isInitialised = false;
 
     public Neptune() {
         Canary.setCanary(this);
@@ -42,10 +49,34 @@ public class Neptune extends Canary {
 
         this.jsonNBT = new NeptuneJsonNBTUtility();
         this.motd = new MessageOfTheDay();
+        this.commandManager = new CommandManager();
         this.hookExecutor = new HookExecutor();
         this.factory = new NeptuneFactory();
         this.pluginManager = new DefaultPluginManager();
 
         pluginManager.scanForPlugins(); // Scan for plugins
+    }
+
+    public void registerCanaryCommands() {
+        try {
+            this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
+        } catch (CommandDependencyException e) {
+            log.error("Failed to set up system commands! Dependency resolution failed!", e);
+        } catch (DuplicateCommandException f) {
+            log.error("Failed to set up system commands! The command already exists!", f);
+        }
+    }
+
+    public void initMOTDListener() {
+        motd().registerMOTDListener(new CanaryMessageOfTheDayListener(), getServer(), false);
+    }
+
+    public void lateInitialisation() {
+        if (isInitialised)
+            return;
+
+        this.registerCanaryCommands();
+        this.initMOTDListener();
+        isInitialised = true;
     }
 }
