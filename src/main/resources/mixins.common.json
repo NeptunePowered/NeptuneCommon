@@ -3,6 +3,7 @@
     "mixins": [
         "command.MixinCommandHandler",
         "entity.ai.MixinEntityAIBase",
+        "entity.MixinEntity",
         "event.MixinClickEvent",
         "event.MixinHoverEvent",
         "item.MixinItem",
