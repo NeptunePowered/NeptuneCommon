@@ -24,6 +24,7 @@
 package org.neptunepowered.common;
 
 import net.canarymod.Canary;
+import net.canarymod.NeptuneTranslator;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
@@ -46,6 +47,7 @@ public class Neptune extends Canary {
 
         DatabaseLoader.load();
         PluginLangLoader.load();
+        NeptuneTranslator.load();
 
         this.jsonNBT = new NeptuneJsonNBTUtility();
         this.motd = new MessageOfTheDay();
