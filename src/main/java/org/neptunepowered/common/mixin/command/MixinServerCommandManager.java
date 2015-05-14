@@ -62,7 +62,7 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
         MinecraftCommand cmd = new MinecraftCommand(command);
         if (Canary.instance() != null) {
             try {
-                Canary.commands().registerCommand(cmd, Neptune.minecraftCommandOwner, true);
+                Canary.commands().registerCommand(cmd, Neptune.minecraftCommandOwner, false);
             } catch (CommandDependencyException e) {
                 Canary.log.error("Eh, something has broken :(", e);
             }
