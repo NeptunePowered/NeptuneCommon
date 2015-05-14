@@ -2,6 +2,7 @@
     "package": "org.neptunepowered.common.mixin",
     "mixins": [
         "command.MixinCommandHandler",
+        "command.MixinServerCommandManager",
         "entity.ai.MixinEntityAIBase",
         "entity.MixinEntity",
         "event.MixinClickEvent",

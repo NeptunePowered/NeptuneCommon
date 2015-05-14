@@ -24,6 +24,9 @@
 package org.neptunepowered.common;
 
 import net.canarymod.Canary;
+import net.canarymod.commandsys.CommandOwner;
+import net.minecraft.server.MinecraftServer;
+import org.neptunepowered.common.interfaces.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.NeptuneTranslator;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
@@ -39,6 +42,13 @@ import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
 
 public class Neptune extends Canary {
+
+    public static final CommandOwner minecraftCommandOwner = new CommandOwner() {
+        @Override
+        public String getName() {
+            return "Minecraft";
+        }
+    };
 
     private boolean isInitialised = false;
 
@@ -67,6 +77,8 @@ public class Neptune extends Canary {
         } catch (DuplicateCommandException f) {
             log.error("Failed to set up system commands! The command already exists!", f);
         }
+
+        ((IMixinServerCommandManager) ((MinecraftServer) server).getCommandManager()).registerEarlyCommands();
     }
 
     public void initMOTDListener() {
