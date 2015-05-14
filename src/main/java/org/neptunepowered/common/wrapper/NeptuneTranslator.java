@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.canarymod;
+package org.neptunepowered.common.wrapper;
 
+import net.canarymod.NativeTranslateBridge;
 import net.minecraft.util.StatCollector;
 
 public class NeptuneTranslator extends NativeTranslateBridge {
@@ -32,17 +33,17 @@ public class NeptuneTranslator extends NativeTranslateBridge {
     }
 
     @Override
-    String nativeTranslate(String key) {
+    protected String nativeTranslate(String key) {
         return StatCollector.translateToLocal(key);
     }
 
     @Override
-    String nativeTranslate(String key, Object... args) {
+    protected String nativeTranslate(String key, Object... args) {
         return StatCollector.translateToLocalFormatted(key, args);
     }
 
     @Override
-    boolean nativeCanTranslate(String key) {
+    protected boolean nativeCanTranslate(String key) {
         return StatCollector.canTranslate(key);
     }
 }

@@ -24,7 +24,7 @@
 package org.neptunepowered.common;
 
 import net.canarymod.Canary;
-import net.canarymod.NeptuneTranslator;
+import org.neptunepowered.common.wrapper.NeptuneTranslator;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
@@ -61,7 +61,7 @@ public class Neptune extends Canary {
 
     public void registerCanaryCommands() {
         try {
-            this.commandManager.registerCommands(new CommandList(), Canary.getServer(), false);
+            this.commandManager.registerCommands(new CommandList(), getServer(), false);
         } catch (CommandDependencyException e) {
             log.error("Failed to set up system commands! Dependency resolution failed!", e);
         } catch (DuplicateCommandException f) {
