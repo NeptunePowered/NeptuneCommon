@@ -45,7 +45,7 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
     @Override
     public ICommand registerCommand(ICommand command) {
         MinecraftCommand cmd = new MinecraftCommand(command);
-        if (Canary.getServer() != null) {
+        if (Canary.instance() != null) {
             try {
                 Canary.commands().registerCommand(cmd, Neptune.minecraftCommandOwner, true);
             } catch (CommandDependencyException e) {
@@ -55,7 +55,7 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
             earlyRegisterCommands.add(cmd);
         }
 
-        return this.registerCommand(command);
+        return super.registerCommand(command);
     }
 
     @Override

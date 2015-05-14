@@ -29,6 +29,7 @@ import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.commandsys.DynamicCommandAnnotation;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
+import org.neptunepowered.common.Neptune;
 
 public class MinecraftCommand extends CanaryCommand {
 
@@ -37,7 +38,7 @@ public class MinecraftCommand extends CanaryCommand {
     public MinecraftCommand(ICommand command) {
         super(new DynamicCommandAnnotation(
                 (String[]) command.getCommandAliases().toArray(new String[command.getCommandAliases().size()]),
-                new String[0], "", "", "", "", new String[0], 0, 0, "", 0), null, null);
+                new String[0], "", "", "", "", new String[0], 0, 0, "", 0), Neptune.minecraftCommandOwner, null);
         this.command = command;
     }
 
