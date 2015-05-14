@@ -46,7 +46,7 @@ public class MixinNetHandlerStatusServer {
     @Shadow private NetworkManager networkManager;
 
     @Overwrite
-    public void onProcessServerQuery(C00PacketServerQuery packetIn) {
+    public void processServerQuery(C00PacketServerQuery packetIn) {
         ServerListPingHook hook =
                 (ServerListPingHook) new ServerListPingHook((InetSocketAddress) networkManager.getRemoteAddress(), 0,
                         null, 0, new NeptuneChatComponent(server.getServerStatusResponse().getServerDescription()),
