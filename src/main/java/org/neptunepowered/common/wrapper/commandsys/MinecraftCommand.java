@@ -45,7 +45,7 @@ public class MinecraftCommand extends CanaryCommand {
     @Override
     protected void execute(MessageReceiver caller, String[] parameters) {
         try {
-            command.processCommand(new WrapperICommandSender(caller), parameters);
+            command.processCommand(new MinecraftCommandSender(caller), parameters);
         } catch (CommandException e) {
             Canary.log.error("Eh, something has broken :(", e);
         }

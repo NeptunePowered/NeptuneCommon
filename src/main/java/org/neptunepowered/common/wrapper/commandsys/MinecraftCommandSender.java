@@ -35,9 +35,9 @@ import net.minecraft.world.World;
 import org.neptunepowered.common.util.Wrapper;
 import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;
 
-public class WrapperICommandSender extends Wrapper<MessageReceiver> implements ICommandSender {
+public class MinecraftCommandSender extends Wrapper<MessageReceiver> implements ICommandSender {
 
-    public WrapperICommandSender(MessageReceiver handle) {
+    public MinecraftCommandSender(MessageReceiver handle) {
         super(handle);
     }
 

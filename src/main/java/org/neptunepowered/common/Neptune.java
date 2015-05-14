@@ -25,6 +25,7 @@ package org.neptunepowered.common;
 
 import net.canarymod.Canary;
 import net.canarymod.commandsys.CommandOwner;
+import net.canarymod.help.HelpManager;
 import net.minecraft.server.MinecraftServer;
 import org.neptunepowered.common.interfaces.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.NeptuneTranslator;
@@ -63,6 +64,7 @@ public class Neptune extends Canary {
         this.motd = new MessageOfTheDay();
         this.commandManager = new CommandManager();
         this.hookExecutor = new HookExecutor();
+        this.helpManager = new HelpManager();
         this.factory = new NeptuneFactory();
         this.pluginManager = new DefaultPluginManager();
 

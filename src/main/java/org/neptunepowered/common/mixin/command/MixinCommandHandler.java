@@ -23,39 +23,20 @@
  */
 package org.neptunepowered.common.mixin.command;
 
-import com.google.common.collect.Lists;
+import net.canarymod.Canary;
+import net.canarymod.chat.MessageReceiver;
 import net.minecraft.command.CommandHandler;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 @Mixin(CommandHandler.class)
 public class MixinCommandHandler {
 
-    @Shadow private Set commandSet;
-
     @Overwrite
     public List getPossibleCommands(ICommandSender sender) {
-        ArrayList arraylist = Lists.newArrayList();
-        Iterator iterator = this.commandSet.iterator();
-
-        // TODO: Canary commands
-
-        while (iterator.hasNext()) {
-            ICommand icommand = (ICommand)iterator.next();
-
-            if (icommand.canCommandSenderUseCommand(sender)) {
-                arraylist.add(icommand);
-            }
-        }
-
-        return arraylist;
+        return Canary.commands().matchCommandNames((MessageReceiver) sender, "", false);
     }
 }

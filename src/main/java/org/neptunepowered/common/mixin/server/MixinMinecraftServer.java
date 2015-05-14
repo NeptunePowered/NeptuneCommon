@@ -400,12 +400,12 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public boolean hasPermission(String node) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean safeHasPermission(String permission) {
-        return false;
+        return true;
     }
 
     @Override

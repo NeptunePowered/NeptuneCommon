@@ -25,9 +25,11 @@ package org.neptunepowered.common.mixin.command;
 
 import com.google.common.collect.Lists;
 import net.canarymod.Canary;
+import net.canarymod.chat.MessageReceiver;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
 import net.minecraft.command.ServerCommandManager;
 import org.neptunepowered.common.Neptune;
 import org.neptunepowered.common.interfaces.IMixinServerCommandManager;
@@ -41,6 +43,19 @@ import java.util.List;
 public class MixinServerCommandManager extends CommandHandler implements IMixinServerCommandManager {
 
     private List<MinecraftCommand> earlyRegisterCommands = Lists.newArrayList();
+
+    @Override
+    public int executeCommand(ICommandSender sender, String command) {
+        command = command.trim();
+        if (command.startsWith("/")) {
+            command = command.substring(1);
+        }
+        String[] args = command.split(" ");
+        String commandName = args[0];
+
+        Canary.commands().parseCommand((MessageReceiver) sender, commandName, args);
+        return 1;
+    }
 
     @Override
     public ICommand registerCommand(ICommand command) {
