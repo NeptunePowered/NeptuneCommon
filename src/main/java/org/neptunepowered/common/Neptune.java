@@ -72,15 +72,14 @@ public class Neptune extends Canary {
     }
 
     public void registerCanaryCommands() {
+        ((IMixinServerCommandManager) ((MinecraftServer) server).getCommandManager()).registerEarlyCommands();
         try {
-            this.commandManager.registerCommands(new CommandList(), getServer(), false);
+            this.commandManager.registerCommands(new CommandList(), getServer(), true);
         } catch (CommandDependencyException e) {
             log.error("Failed to set up system commands! Dependency resolution failed!", e);
         } catch (DuplicateCommandException f) {
             log.error("Failed to set up system commands! The command already exists!", f);
         }
-
-        ((IMixinServerCommandManager) ((MinecraftServer) server).getCommandManager()).registerEarlyCommands();
     }
 
     public void initMOTDListener() {

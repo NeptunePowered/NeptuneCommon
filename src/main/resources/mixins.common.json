@@ -1,7 +1,6 @@
 {
     "package": "org.neptunepowered.common.mixin",
     "mixins": [
-        "command.MixinCommandHandler",
         "command.MixinCommandSender",
         "command.MixinServerCommandManager",
         "entity.ai.MixinEntityAIBase",

@@ -31,9 +31,10 @@ import net.minecraft.command.CommandHandler;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.ServerCommandManager;
+import net.minecraft.util.BlockPos;
 import org.neptunepowered.common.Neptune;
 import org.neptunepowered.common.interfaces.IMixinServerCommandManager;
-import org.neptunepowered.common.wrapper.commandsys.MinecraftCommand;
+import org.neptunepowered.common.wrapper.commandsys.NeptuneCommand;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Iterator;
@@ -42,7 +43,7 @@ import java.util.List;
 @Mixin(ServerCommandManager.class)
 public class MixinServerCommandManager extends CommandHandler implements IMixinServerCommandManager {
 
-    private List<MinecraftCommand> earlyRegisterCommands = Lists.newArrayList();
+    private List<NeptuneCommand> earlyRegisterCommands = Lists.newArrayList();
 
     @Override
     public int executeCommand(ICommandSender sender, String command) {
@@ -53,13 +54,12 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
         String[] args = command.split(" ");
         String commandName = args[0];
 
-        Canary.commands().parseCommand((MessageReceiver) sender, commandName, args);
-        return 1;
+        return Canary.commands().parseCommand((MessageReceiver) sender, commandName, args) ? 1 : 0;
     }
 
     @Override
     public ICommand registerCommand(ICommand command) {
-        MinecraftCommand cmd = new MinecraftCommand(command);
+        NeptuneCommand cmd = new NeptuneCommand(command);
         if (Canary.instance() != null) {
             try {
                 Canary.commands().registerCommand(cmd, Neptune.minecraftCommandOwner, false);
@@ -74,9 +74,25 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
     }
 
     @Override
+    public List getPossibleCommands(ICommandSender sender) {
+        return Canary.commands().matchCommandNames((MessageReceiver) sender, "", false);
+    }
+
+    @Override
+    public List getTabCompletionOptions(ICommandSender sender, String command, BlockPos pos) {
+        command = command.trim();
+        if (command.startsWith("/")) {
+            command = command.substring(1);
+        }
+        String[] args = command.split(" ");
+        String commandName = args[0];
+        return Canary.commands().tabComplete((MessageReceiver) sender, commandName, args);
+    }
+
+    @Override
     public void registerEarlyCommands() {
-        for (Iterator<MinecraftCommand> it = earlyRegisterCommands.iterator(); it.hasNext();) {
-            MinecraftCommand cmd = it.next();
+        for (Iterator<NeptuneCommand> it = earlyRegisterCommands.iterator(); it.hasNext();) {
+            NeptuneCommand cmd = it.next();
             it.remove();
             try {
                 Canary.commands().registerCommand(cmd, Neptune.minecraftCommandOwner, true);

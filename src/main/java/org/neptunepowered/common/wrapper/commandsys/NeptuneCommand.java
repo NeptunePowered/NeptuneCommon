@@ -27,18 +27,30 @@ import net.canarymod.Canary;
 import net.canarymod.chat.MessageReceiver;
 import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.commandsys.DynamicCommandAnnotation;
+import net.canarymod.commandsys.TabCompleteDispatch;
+import net.canarymod.commandsys.TabCompleteException;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.util.BlockPos;
 import org.neptunepowered.common.Neptune;
 
-public class MinecraftCommand extends CanaryCommand {
+import java.util.List;
+
+public class NeptuneCommand extends CanaryCommand {
 
     private final ICommand command;
 
-    public MinecraftCommand(ICommand command) {
+    public NeptuneCommand(final ICommand command) {
         super(new DynamicCommandAnnotation(
                 (String[]) command.getCommandAliases().toArray(new String[command.getCommandAliases().size()]),
-                new String[0], "", "", "", "", new String[0], 0, 0, "", 0), Neptune.minecraftCommandOwner, null);
+                new String[0], "", "", "", "", new String[0], 0, 0, "", 2), Neptune.minecraftCommandOwner, null,
+                new TabCompleteDispatch() {
+                    @Override
+                    public List<String> complete(MessageReceiver msgrec, String[] args) throws TabCompleteException {
+                        return command.addTabCompletionOptions((ICommandSender) msgrec, args, BlockPos.ORIGIN);
+                    }
+                });
         this.command = command;
     }
 

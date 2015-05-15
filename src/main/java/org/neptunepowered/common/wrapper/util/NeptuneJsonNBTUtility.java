@@ -50,7 +50,7 @@ public class NeptuneJsonNBTUtility implements JsonNBTUtility {
 
     @Override
     public GameProfile gameProfileFromNBT(CompoundTag tag) {
-        return NBTUtil.readGameProfileFromNBT(null); // TODO:
+        return NBTUtil.readGameProfileFromNBT((NBTTagCompound) tag);
     }
 
     @Override
