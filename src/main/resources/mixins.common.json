@@ -5,6 +5,8 @@
         "command.MixinServerCommandManager",
         "entity.ai.MixinEntityAIBase",
         "entity.MixinEntity",
+        "entity.MixinEntityArrow",
+        "entity.MixinProjectile",
         "event.MixinClickEvent",
         "event.MixinHoverEvent",
         "item.MixinItem",
