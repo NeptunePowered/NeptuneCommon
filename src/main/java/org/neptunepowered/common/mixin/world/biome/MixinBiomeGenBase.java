@@ -36,17 +36,10 @@ import java.util.Random;
 @Mixin(BiomeGenBase.class)
 public abstract class MixinBiomeGenBase implements Biome {
 
-    @Shadow
-    public float temperature;
-
-    @Shadow
-    protected boolean enableSnow;
-
-    @Shadow
-    protected boolean enableRain;
-
-    @Shadow
-    public int biomeID;
+    @Shadow public float temperature;
+    @Shadow protected boolean enableSnow;
+    @Shadow protected boolean enableRain;
+    @Shadow public int biomeID;
 
     @Shadow
     public abstract void decorate(net.minecraft.world.World worldIn, Random p_180624_2_, BlockPos p_180624_3_);

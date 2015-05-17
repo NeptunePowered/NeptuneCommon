@@ -35,8 +35,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Implements(@Interface(iface = ByteArrayTag.class, prefix = "tag$"))
 public abstract class MixinNBTTagByteArray extends NBTBase {
 
-    @Shadow
-    private byte[] data;
+    @Shadow private byte[] data;
 
     public byte[] tag$getValue() {
         return data;

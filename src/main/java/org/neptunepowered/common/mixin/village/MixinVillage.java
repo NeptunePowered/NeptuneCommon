@@ -33,20 +33,11 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(net.minecraft.village.Village.class)
 public abstract class MixinVillage implements Village {
 
-    @Shadow
-    private BlockPos center;
-
-    @Shadow
-    private int noBreedTicks;
-
-    @Shadow
-    private int villageRadius;
-
-    @Shadow
-    private int numVillagers;
-
-    @Shadow
-    private int numIronGolems;
+    @Shadow private BlockPos center;
+    @Shadow private int noBreedTicks;
+    @Shadow private int villageRadius;
+    @Shadow private int numVillagers;
+    @Shadow private int numIronGolems;
 
     @Override
     public void setReputationForPlayer(Player player, int rep) {

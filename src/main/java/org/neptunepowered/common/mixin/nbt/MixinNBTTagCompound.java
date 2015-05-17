@@ -43,8 +43,7 @@ import java.util.Set;
 @Implements(@Interface(iface = CompoundTag.class, prefix = "tag$"))
 public abstract class MixinNBTTagCompound extends NBTBase {
 
-    @Shadow
-    private Map tagMap;
+    @Shadow private Map tagMap;
 
     @Shadow
     public abstract int getInteger(String key);

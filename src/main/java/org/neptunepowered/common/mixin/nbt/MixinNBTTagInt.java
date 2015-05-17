@@ -35,8 +35,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Implements(@Interface(iface = IntTag.class, prefix = "tag$"))
 public abstract class MixinNBTTagInt extends NBTBase.NBTPrimitive {
 
-    @Shadow
-    private int data;
+    @Shadow private int data;
 
     public int tag$getValue() {
         return data;

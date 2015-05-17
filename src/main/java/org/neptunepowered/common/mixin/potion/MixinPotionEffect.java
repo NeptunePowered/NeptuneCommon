@@ -31,8 +31,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(net.minecraft.potion.PotionEffect.class)
 public abstract class MixinPotionEffect implements PotionEffect {
 
-    @Shadow
-    private boolean isAmbient;
+    @Shadow private boolean isAmbient;
 
     @Shadow
     public abstract String getEffectName();

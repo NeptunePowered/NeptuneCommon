@@ -31,11 +31,8 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Potion.class)
 public abstract class MixinPotion implements net.canarymod.api.potion.Potion {
 
-    @Shadow
-    public int id;
-
-    @Shadow
-    private boolean isBadEffect;
+    @Shadow public int id;
+    @Shadow private boolean isBadEffect;
 
     @Override
     public int getID() {
