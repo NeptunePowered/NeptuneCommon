@@ -26,7 +26,9 @@ package org.neptunepowered.common.wrapper.chat;
 import com.google.common.collect.Lists;
 import net.canarymod.api.chat.ChatComponent;
 import net.canarymod.api.chat.ChatStyle;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
+import org.neptunepowered.common.interfaces.IMixinChatComponentText;
 import org.neptunepowered.common.util.Wrapper;
 
 import java.util.List;
@@ -39,8 +41,7 @@ public class NeptuneChatComponent extends Wrapper<IChatComponent> implements Cha
 
     @Override
     public ChatComponent setChatStyle(ChatStyle style) {
-        getHandle().setChatStyle((net.minecraft.util.ChatStyle) style);
-        return this;
+        return (ChatComponent) getHandle().setChatStyle((net.minecraft.util.ChatStyle) style);
     }
 
     @Override
@@ -50,18 +51,20 @@ public class NeptuneChatComponent extends Wrapper<IChatComponent> implements Cha
 
     @Override
     public ChatComponent setText(String text) {
-        return null;
+        if(getHandle() instanceof ChatComponentText) {
+            ((IMixinChatComponentText)getHandle()).setText(text);
+        }
+        return this;
     }
 
     @Override
     public ChatComponent appendText(String text) {
-        return null;
+        return (ChatComponent) getHandle().appendText(text);
     }
 
     @Override
     public ChatComponent appendSibling(ChatComponent sibling) {
-        getHandle().appendSibling(((NeptuneChatComponent) sibling).getHandle());
-        return this;
+        return (ChatComponent) getHandle().appendSibling(((NeptuneChatComponent) sibling).getHandle());
     }
 
     @Override

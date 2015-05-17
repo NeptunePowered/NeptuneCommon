@@ -41,6 +41,7 @@
         "stats.MixinStatBase",
         "tileentity.MixinTileEntity",
         "util.MixinAxisAlignedBB",
+        "util.MixinChatComponentText",
         "util.MixinChatStyle",
         "util.MixinDamageSource",
         "village.MixinMerchantRecipe",
