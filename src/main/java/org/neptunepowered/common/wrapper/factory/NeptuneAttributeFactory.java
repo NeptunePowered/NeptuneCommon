@@ -21,20 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.entity;
+package org.neptunepowered.common.wrapper.factory;
 
-import net.canarymod.api.entity.Projectile;
-import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityThrowable;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import net.canarymod.api.attributes.Attribute;
+import net.canarymod.api.factory.AttributeFactory;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttribute;
 
-@Mixin({EntityArrow.class, EntityThrowable.class})
-public abstract class MixinProjectile implements Projectile, IProjectile {
+public class NeptuneAttributeFactory implements AttributeFactory {
 
-    public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw,
-            float rotationPitch) {
-        setThrowableHeading(motionX, motionY, motionZ, rotationYaw, rotationPitch);
+    private IAttribute[] attributes = {
+            SharedMonsterAttributes.maxHealth,
+            SharedMonsterAttributes.followRange,
+            SharedMonsterAttributes.knockbackResistance,
+            SharedMonsterAttributes.movementSpeed,
+            SharedMonsterAttributes.attackDamage
+    };
+
+    @Override
+    public Attribute getGenericAttribute(String nativeName) {
+        for (IAttribute attribute : attributes) {
+            if (attribute.getAttributeUnlocalizedName().equalsIgnoreCase(nativeName)) {
+                return (Attribute) attribute;
+            }
+        }
+        return null;
     }
 }

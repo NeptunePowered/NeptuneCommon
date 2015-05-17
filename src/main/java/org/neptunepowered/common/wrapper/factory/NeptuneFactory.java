@@ -43,6 +43,7 @@ public class NeptuneFactory implements Factory {
     private final NBTFactory nbtFactory = new NeptuneNBTFactory();
     private final PacketFactory packetFactory = new NeptunePacketFactory();
     private final ChatComponentFactory chatComponentFactory = new NeptuneChatComponentFactory();
+    private final AttributeFactory attributeFactory = new NeptuneAttributeFactory();
     private final StatisticsFactory statisticsFactory = new NeptuneStatisticsFactory();
     private final AIFactory aiFactory = new NeptuneAIFactory();
 
@@ -83,7 +84,7 @@ public class NeptuneFactory implements Factory {
 
     @Override
     public AttributeFactory getAttributeFactory() {
-        return null;
+        return attributeFactory;
     }
 
     @Override
