@@ -3,9 +3,12 @@
     "mixins": [
         "command.MixinCommandSender",
         "command.MixinServerCommandManager",
+        "entity.ai.attributes.MixinAttributeModifier",
+        "entity.ai.attributes.MixinBaseAttribute",
         "entity.ai.MixinEntityAIBase",
+        "entity.projectile.MixinEntityArrow",
+        "entity.projectile.MixinEntityThrowable",
         "entity.MixinEntity",
-        "entity.MixinEntityArrow",
         "entity.MixinProjectile",
         "event.MixinClickEvent",
         "event.MixinHoverEvent",
