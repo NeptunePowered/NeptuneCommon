@@ -23,6 +23,8 @@
  */
 package org.neptunepowered.common.wrapper.factory;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import net.canarymod.api.attributes.Attribute;
 import net.canarymod.api.factory.AttributeFactory;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -30,21 +32,22 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 
 public class NeptuneAttributeFactory implements AttributeFactory {
 
-    private IAttribute[] attributes = {
-            SharedMonsterAttributes.maxHealth,
-            SharedMonsterAttributes.followRange,
-            SharedMonsterAttributes.knockbackResistance,
-            SharedMonsterAttributes.movementSpeed,
-            SharedMonsterAttributes.attackDamage
-    };
+    private static BiMap<IAttribute, String> map =
+            ImmutableBiMap.<IAttribute, String>builder()
+                    .put(SharedMonsterAttributes.maxHealth,
+                            SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName())
+                    .put(SharedMonsterAttributes.followRange,
+                            SharedMonsterAttributes.followRange.getAttributeUnlocalizedName())
+                    .put(SharedMonsterAttributes.knockbackResistance,
+                            SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName())
+                    .put(SharedMonsterAttributes.movementSpeed,
+                            SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName())
+                    .put(SharedMonsterAttributes.attackDamage,
+                            SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName())
+                    .build();
 
     @Override
     public Attribute getGenericAttribute(String nativeName) {
-        for (IAttribute attribute : attributes) {
-            if (attribute.getAttributeUnlocalizedName().equalsIgnoreCase(nativeName)) {
-                return (Attribute) attribute;
-            }
-        }
-        return null;
+        return (Attribute) map.inverse().get(nativeName);
     }
 }
