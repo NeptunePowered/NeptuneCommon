@@ -27,7 +27,7 @@ import net.canarymod.Canary;
 import net.canarymod.commandsys.CommandOwner;
 import net.canarymod.help.HelpManager;
 import net.minecraft.server.MinecraftServer;
-import org.neptunepowered.common.interfaces.IMixinServerCommandManager;
+import org.neptunepowered.common.interfaces.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.NeptuneTranslator;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;

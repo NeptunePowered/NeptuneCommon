@@ -31,7 +31,6 @@ import net.canarymod.api.packet.Packet;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.network.play.server.S02PacketChat;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;

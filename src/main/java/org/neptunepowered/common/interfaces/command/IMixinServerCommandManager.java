@@ -21,21 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.util;
+package org.neptunepowered.common.interfaces.command;
 
-import net.minecraft.util.ChatComponentStyle;
-import net.minecraft.util.ChatComponentText;
-import org.neptunepowered.common.interfaces.util.IMixinChatComponentText;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+public interface IMixinServerCommandManager {
 
-@Mixin(ChatComponentText.class)
-public abstract class MixinChatComponentText extends ChatComponentStyle implements IMixinChatComponentText {
-
-    @Shadow private String text;
-
-    @Override
-    public void setText(String text) {
-        this.text = text;
-    }
+    void registerEarlyCommands();
 }

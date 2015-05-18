@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.interfaces;
+package org.neptunepowered.common.interfaces.util;
 
 public interface IMixinChatComponentText {
 

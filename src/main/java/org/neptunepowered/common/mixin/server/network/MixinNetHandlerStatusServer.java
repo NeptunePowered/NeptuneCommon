@@ -31,6 +31,7 @@ import net.minecraft.network.status.client.C00PacketServerQuery;
 import net.minecraft.network.status.server.S00PacketServerInfo;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.NetHandlerStatusServer;
+import org.neptunepowered.common.interfaces.network.IMixinNetworkManager;
 import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -48,12 +49,14 @@ public class MixinNetHandlerStatusServer {
     @Overwrite
     public void processServerQuery(C00PacketServerQuery packetIn) {
         ServerListPingHook hook =
-                (ServerListPingHook) new ServerListPingHook((InetSocketAddress) networkManager.getRemoteAddress(), 0,
-                        null, 0, new NeptuneChatComponent(server.getServerStatusResponse().getServerDescription()),
+                (ServerListPingHook) new ServerListPingHook((InetSocketAddress) networkManager.getRemoteAddress(),
+                        ((IMixinNetworkManager) networkManager).getProtocolVersion(),
+                        ((IMixinNetworkManager) networkManager).getHostnamePinged(),
+                        ((IMixinNetworkManager) networkManager).getPortPinged(),
+                        new NeptuneChatComponent(server.getServerStatusResponse().getServerDescription()),
                         server.getServerStatusResponse().getPlayerCountData().getOnlinePlayerCount(),
-                        server.getServerStatusResponse()
-                                .getPlayerCountData().getMaxPlayers(), server.getServerStatusResponse()
-                        .getFavicon(),
+                        server.getServerStatusResponse().getPlayerCountData().getMaxPlayers(),
+                        server.getServerStatusResponse().getFavicon(),
                         Arrays.asList(server.getServerStatusResponse().getPlayerCountData().getPlayers())).call();
         if (hook.isCanceled()) {
             networkManager.closeChannel(null);

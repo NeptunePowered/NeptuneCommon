@@ -21,9 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.interfaces;
+package org.neptunepowered.common.mixin.network;
 
-public interface IMixinServerCommandManager {
+import io.netty.channel.SimpleChannelInboundHandler;
+import net.minecraft.network.NetworkManager;
+import org.neptunepowered.common.interfaces.network.IMixinNetworkManager;
+import org.spongepowered.asm.mixin.Mixin;
 
-    void registerEarlyCommands();
+@Mixin(NetworkManager.class)
+public abstract class MixinNetworkManager extends SimpleChannelInboundHandler implements IMixinNetworkManager {
+
+    private int protocolVersion;
+    private String hostnamePinged;
+    private int portPinged;
+
+    public int getProtocolVersion() {
+        return this.protocolVersion;
+    }
+
+    public void setProtocolVersion(int version) {
+        this.protocolVersion = version;
+    }
+
+    public String getHostnamePinged() {
+        return this.hostnamePinged;
+    }
+
+    public void setHostnamePinged(String hostname) {
+        this.hostnamePinged = hostname;
+    }
+
+    public int getPortPinged() {
+        return this.portPinged;
+    }
+
+    public void setPortPinged(int port) {
+        this.portPinged = port;
+    }
 }

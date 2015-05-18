@@ -21,21 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.util;
+package org.neptunepowered.common.mixin.server.network;
 
-import net.minecraft.util.ChatComponentStyle;
-import net.minecraft.util.ChatComponentText;
-import org.neptunepowered.common.interfaces.util.IMixinChatComponentText;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.handshake.client.C00Handshake;
+import net.minecraft.server.network.NetHandlerHandshakeTCP;
+import org.neptunepowered.common.interfaces.network.IMixinNetworkManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ChatComponentText.class)
-public abstract class MixinChatComponentText extends ChatComponentStyle implements IMixinChatComponentText {
+@Mixin(NetHandlerHandshakeTCP.class)
+public class MixinNetHandlerHandshakeTCP {
 
-    @Shadow private String text;
+    @Shadow private NetworkManager networkManager;
 
-    @Override
-    public void setText(String text) {
-        this.text = text;
+    @Inject(method = "processHandshake", at = @At("HEAD"))
+    public void onProcessHandshake(C00Handshake packetIn, CallbackInfo ci) {
+        IMixinNetworkManager info = (IMixinNetworkManager) this.networkManager;
+        info.setProtocolVersion(packetIn.getProtocolVersion());
+        info.setHostnamePinged(packetIn.ip);
+        info.setPortPinged(packetIn.port);
     }
 }

@@ -33,7 +33,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.util.BlockPos;
 import org.neptunepowered.common.Neptune;
-import org.neptunepowered.common.interfaces.IMixinServerCommandManager;
+import org.neptunepowered.common.interfaces.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.commandsys.NeptuneCommand;
 import org.spongepowered.asm.mixin.Mixin;
 

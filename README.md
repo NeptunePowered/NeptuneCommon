@@ -1,7 +1,7 @@
 NeptuneCommon
 =============
 **Currently not stable and under heavy development!**  
-Shared code between Neptune and Arno, licensed under the [MIT License]. 
+Shared code between NeptuneVanilla and NeptuneForge, licensed under the [MIT License]. 
 
 * [Homepage]
 * [Source]
