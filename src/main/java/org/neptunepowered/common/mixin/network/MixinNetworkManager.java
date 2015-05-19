@@ -35,26 +35,32 @@ public abstract class MixinNetworkManager extends SimpleChannelInboundHandler im
     private String hostnamePinged;
     private int portPinged;
 
+    @Override
     public int getProtocolVersion() {
         return this.protocolVersion;
     }
 
+    @Override
     public void setProtocolVersion(int version) {
         this.protocolVersion = version;
     }
 
+    @Override
     public String getHostnamePinged() {
         return this.hostnamePinged;
     }
 
+    @Override
     public void setHostnamePinged(String hostname) {
         this.hostnamePinged = hostname;
     }
 
+    @Override
     public int getPortPinged() {
         return this.portPinged;
     }
 
+    @Override
     public void setPortPinged(int port) {
         this.portPinged = port;
     }
