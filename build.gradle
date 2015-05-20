@@ -26,5 +26,8 @@ repositories {
 
 dependencies {
     compile 'net.canarymod:CanaryLib:1.2.1-SNAPSHOT'
-    compile 'org.spongepowered:mixin:0.3.2-SNAPSHOT'
+    compile('org.spongepowered:mixin:0.3.2-SNAPSHOT') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+    }
 }
