@@ -60,12 +60,12 @@ public class Neptune extends Canary {
         PluginLangLoader.load();
         NeptuneTranslator.load();
 
-        this.jsonNBT = new NeptuneJsonNBTUtility();
-        this.motd = new MessageOfTheDay();
-        this.commandManager = new CommandManager();
-        this.hookExecutor = new HookExecutor();
-        this.helpManager = new HelpManager();
-        this.factory = new NeptuneFactory();
+        this.jsonNBT = new NeptuneJsonNBTUtility(); // JSON utility
+        this.motd = new MessageOfTheDay(); // MessageOfTheDay
+        this.commandManager = new CommandManager(); // Manage all the commands :D
+        this.hookExecutor = new HookExecutor(); // Execute the hooks
+        this.helpManager = new HelpManager(); // /help
+        this.factory = new NeptuneFactory(); // Factories
         this.pluginManager = new DefaultPluginManager();
 
         pluginManager.scanForPlugins(); // Scan for plugins

@@ -50,6 +50,21 @@ public abstract class MixinAxisAlignedBB implements BoundingBox {
     @Shadow
     public abstract AxisAlignedBB shadow$expand(double x, double y, double z);
 
+    @Shadow
+    public abstract AxisAlignedBB union(AxisAlignedBB other);
+
+    @Shadow
+    public abstract double calculateXOffset(AxisAlignedBB other, double offsetX);
+
+    @Shadow
+    public abstract double calculateYOffset(AxisAlignedBB other, double offsetY);
+
+    @Shadow
+    public abstract double calculateZOffset(AxisAlignedBB other, double offsetZ);
+
+    @Shadow
+    public abstract boolean intersectsWith(AxisAlignedBB other);
+
     @Override
     public double getMinX() {
         return minX;
@@ -97,7 +112,7 @@ public abstract class MixinAxisAlignedBB implements BoundingBox {
 
     @Override
     public BoundingBox union(BoundingBox boundingBox) {
-        return null;
+        return (BoundingBox) union((AxisAlignedBB) boundingBox);
     }
 
     @Override
@@ -107,22 +122,22 @@ public abstract class MixinAxisAlignedBB implements BoundingBox {
 
     @Override
     public double calculateXOffset(BoundingBox other, double xOffset) {
-        return 0;
+        return calculateXOffset((AxisAlignedBB) other, xOffset);
     }
 
     @Override
     public double calculateYOffset(BoundingBox other, double yOffset) {
-        return 0;
+        return calculateYOffset((AxisAlignedBB) other, yOffset);
     }
 
     @Override
     public double calculateZOffset(BoundingBox other, double zOffset) {
-        return 0;
+        return calculateZOffset((AxisAlignedBB) other, zOffset);
     }
 
     @Override
     public boolean intersectsWith(BoundingBox other) {
-        return false;
+        return intersectsWith((AxisAlignedBB) other);
     }
 
     @Shadow

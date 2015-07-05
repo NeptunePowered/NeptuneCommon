@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(NetHandlerHandshakeTCP.class)
-public class MixinNetHandlerHandshakeTCP {
+public abstract class MixinNetHandlerHandshakeTCP {
 
     @Shadow private NetworkManager networkManager;
 
