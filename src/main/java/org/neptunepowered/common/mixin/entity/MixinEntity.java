@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Mixin(net.minecraft.entity.Entity.class)
-public class MixinEntity implements Entity {
+public abstract class MixinEntity implements Entity {
 
     @Shadow public double posX;
     @Shadow public double posY;
@@ -52,6 +52,9 @@ public class MixinEntity implements Entity {
     @Shadow public double motionZ;
     @Shadow public float rotationPitch;
     @Shadow public float rotationYaw;
+
+    @Shadow protected boolean isInWeb;
+    @Shadow public boolean preventEntitySpawning;
 
     @Shadow private int entityId;
     @Shadow protected UUID entityUniqueID;
@@ -114,9 +117,8 @@ public class MixinEntity implements Entity {
     }
 
     @Override
-    public float getEyeHeight() {
-        return 0;
-    }
+    @Shadow
+    public abstract float getEyeHeight();
 
     @Override
     public int getID() {
@@ -239,24 +241,20 @@ public class MixinEntity implements Entity {
     }
 
     @Override
-    public boolean isSprinting() {
-        return false;
-    }
+    @Shadow
+    public abstract boolean isSprinting();
 
     @Override
-    public void setSprinting(boolean sprinting) {
-
-    }
-
-    @Override
-    public boolean isSneaking() {
-        return false;
-    }
+    @Shadow
+    public abstract void setSprinting(boolean sprinting);
 
     @Override
-    public void setSneaking(boolean sneaking) {
+    @Shadow
+    public abstract boolean isSneaking();
 
-    }
+    @Override
+    @Shadow
+    public abstract void setSneaking(boolean sneaking);
 
     @Override
     public void setFireTicks(int ticks) {
@@ -325,7 +323,7 @@ public class MixinEntity implements Entity {
 
     @Override
     public boolean canSpawn() {
-        return false;
+        return !preventEntitySpawning;
     }
 
     @Override
@@ -394,14 +392,12 @@ public class MixinEntity implements Entity {
     }
 
     @Override
-    public boolean isInvisible() {
-        return false;
-    }
+    @Shadow
+    public abstract boolean isInvisible();
 
     @Override
-    public void setInvisible(boolean invisible) {
-
-    }
+    @Shadow
+    public abstract void setInvisible(boolean invisible);
 
     @Override
     public CompoundTag getMetaData() {
@@ -425,7 +421,7 @@ public class MixinEntity implements Entity {
 
     @Override
     public boolean isInWeb() {
-        return false;
+        return isInWeb;
     }
 
     @Override
@@ -434,9 +430,8 @@ public class MixinEntity implements Entity {
     }
 
     @Override
-    public boolean isInLava() {
-        return false;
-    }
+    @Shadow
+    public abstract boolean isInLava();
 
     @Override
     public boolean hasDisplayName() {

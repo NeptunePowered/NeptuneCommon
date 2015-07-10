@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
             name = 'forge'
             url = 'http://files.minecraftforge.net/maven'
@@ -12,10 +13,14 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecrell:VanillaGradle:1.0.1-SNAPSHOT'
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
     }
 }
 apply plugin: 'net.minecrell.vanilla.base'
+apply plugin: 'license'
 apply from: 'gradle/minecraft.gradle'
+
+defaultTasks 'licenseFormat'
 
 repositories {
     mavenCentral()
@@ -29,5 +34,13 @@ dependencies {
     compile('org.spongepowered:mixin:0.3.2-SNAPSHOT') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
+    }
+}
+
+license {
+    header file('HEADER.txt')
+    strictCheck true
+    mapping {
+        java = 'SLASHSTAR_STYLE'
     }
 }

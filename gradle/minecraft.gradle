@@ -13,8 +13,8 @@ targetCompatibility = '1.6'
 repositories {
     mavenCentral()
     maven {
-        name = 'Visual Illusions Repository'
-        url = 'http://repo.visualillusionsent.net/repository/public/'
+        name = 'larry1123-repo'
+        url = 'http://repo.larry1123.net/content/groups/public/'
     }
     maven {
         name = 'mcstats.org releases'
