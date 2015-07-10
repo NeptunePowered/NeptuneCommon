@@ -39,7 +39,7 @@ public class MixinDedicatedServer {
                     + "Ljava/lang/String;)V"))
     public void onStartServer(CallbackInfoReturnable<Boolean> ci) {
         Canary.enableEarlyPlugins();
-        ((Neptune)Canary.instance()).lateInitialisation();
+        ((Neptune) Canary.instance()).lateInitialisation();
         Canary.enableLatePlugins();
     }
 }

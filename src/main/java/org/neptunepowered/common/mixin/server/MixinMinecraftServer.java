@@ -25,7 +25,6 @@ package org.neptunepowered.common.mixin.server;
 
 import static net.canarymod.Canary.log;
 
-import net.canarymod.Canary;
 import net.canarymod.api.CommandBlockLogic;
 import net.canarymod.api.ConfigurationManager;
 import net.canarymod.api.OfflinePlayer;
@@ -43,11 +42,8 @@ import net.canarymod.api.world.WorldManager;
 import net.canarymod.chat.MessageReceiver;
 import net.canarymod.chat.ReceiverType;
 import net.canarymod.exceptions.InvalidInstanceException;
-import net.canarymod.hook.command.ConsoleCommandHook;
 import net.canarymod.logger.Logman;
 import net.canarymod.tasks.ServerTask;
-import net.minecraft.command.ICommandManager;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
@@ -250,7 +246,8 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public void addSmeltingRecipe(SmeltRecipe recipe) {
-        FurnaceRecipes.instance().addSmelting(net.minecraft.item.Item.getItemById(recipe.getItemIDFrom()), (net.minecraft.item.ItemStack) recipe.getResult(), recipe.getXP());
+        FurnaceRecipes.instance().addSmelting(net.minecraft.item.Item.getItemById(recipe.getItemIDFrom()),
+                (net.minecraft.item.ItemStack) recipe.getResult(), recipe.getXP());
     }
 
     @Override

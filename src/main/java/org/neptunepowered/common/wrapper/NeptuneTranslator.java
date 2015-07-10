@@ -29,7 +29,9 @@ import net.minecraft.util.StatCollector;
 public class NeptuneTranslator extends NativeTranslateBridge {
 
     public static void load() {
-        if ($ == null) $ = new NeptuneTranslator();
+        if ($ == null) {
+            $ = new NeptuneTranslator();
+        }
     }
 
     @Override

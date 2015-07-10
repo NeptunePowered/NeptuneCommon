@@ -70,7 +70,8 @@ public class NeptuneAIFactory implements AIFactory {
     @Override
     public AIArrowAttack newAIArrowAttack(RangedAttackMob mob, double moveSpeed, int attackTimeModifier,
             int maxRangedAttackTime, int maxAttackDistance) {
-        return (AIArrowAttack) new EntityAIArrowAttack(null, moveSpeed, attackTimeModifier, maxRangedAttackTime, maxAttackDistance);
+        return (AIArrowAttack) new EntityAIArrowAttack(null, moveSpeed, attackTimeModifier, maxRangedAttackTime,
+                maxAttackDistance);
     }
 
     @Override

@@ -91,7 +91,7 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
 
     @Override
     public void registerEarlyCommands() {
-        for (Iterator<NeptuneCommand> it = earlyRegisterCommands.iterator(); it.hasNext();) {
+        for (Iterator<NeptuneCommand> it = earlyRegisterCommands.iterator(); it.hasNext(); ) {
             NeptuneCommand cmd = it.next();
             it.remove();
             try {

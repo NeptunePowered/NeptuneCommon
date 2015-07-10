@@ -27,7 +27,6 @@ import com.mojang.authlib.GameProfile;
 import io.netty.buffer.Unpooled;
 import net.canarymod.Canary;
 import net.canarymod.api.ConfigurationManager;
-import net.canarymod.api.chat.ChatComponent;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.packet.Packet;
 import net.canarymod.api.world.DimensionType;

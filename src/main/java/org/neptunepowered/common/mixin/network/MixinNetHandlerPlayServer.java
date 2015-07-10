@@ -56,8 +56,9 @@ public abstract class MixinNetHandlerPlayServer implements NetServerHandler {
 
     @Override
     public void handleChat(Packet chatPacket) {
-        if(!(((NeptunePacket) chatPacket).getHandle() instanceof S02PacketChat))
+        if (!(((NeptunePacket) chatPacket).getHandle() instanceof S02PacketChat)) {
             return;
+        }
 
         sendPacket(chatPacket);
     }
@@ -69,8 +70,9 @@ public abstract class MixinNetHandlerPlayServer implements NetServerHandler {
 
     @Override
     public void handleRespawn(Packet respawnPacket) {
-        if (!(((NeptunePacket)respawnPacket).getHandle() instanceof S07PacketRespawn))
+        if (!(((NeptunePacket) respawnPacket).getHandle() instanceof S07PacketRespawn)) {
             return;
+        }
 
         sendPacket(respawnPacket);
     }

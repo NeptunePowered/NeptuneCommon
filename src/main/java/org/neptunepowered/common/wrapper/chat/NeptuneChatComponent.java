@@ -51,8 +51,8 @@ public class NeptuneChatComponent extends Wrapper<IChatComponent> implements Cha
 
     @Override
     public ChatComponent setText(String text) {
-        if(getHandle() instanceof ChatComponentText) {
-            ((IMixinChatComponentText)getHandle()).setText(text);
+        if (getHandle() instanceof ChatComponentText) {
+            ((IMixinChatComponentText) getHandle()).setText(text);
         }
         return this;
     }

@@ -32,22 +32,22 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 
 public class NeptuneAttributeFactory implements AttributeFactory {
 
-    private static BiMap<IAttribute, String> map =
-            ImmutableBiMap.<IAttribute, String>builder()
-                    .put(SharedMonsterAttributes.maxHealth,
-                            SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName())
-                    .put(SharedMonsterAttributes.followRange,
-                            SharedMonsterAttributes.followRange.getAttributeUnlocalizedName())
-                    .put(SharedMonsterAttributes.knockbackResistance,
-                            SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName())
-                    .put(SharedMonsterAttributes.movementSpeed,
-                            SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName())
-                    .put(SharedMonsterAttributes.attackDamage,
-                            SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName())
+    private static BiMap<String, IAttribute> map =
+            ImmutableBiMap.<String, IAttribute>builder()
+                    .put(SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName(),
+                            SharedMonsterAttributes.maxHealth)
+                    .put(SharedMonsterAttributes.followRange.getAttributeUnlocalizedName(),
+                            SharedMonsterAttributes.followRange)
+                    .put(SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName(),
+                            SharedMonsterAttributes.knockbackResistance)
+                    .put(SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
+                            SharedMonsterAttributes.movementSpeed)
+                    .put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+                            SharedMonsterAttributes.attackDamage)
                     .build();
 
     @Override
     public Attribute getGenericAttribute(String nativeName) {
-        return (Attribute) map.inverse().get(nativeName);
+        return (Attribute) map.get(nativeName);
     }
 }

@@ -28,7 +28,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin({EntityArrow.class, EntityThrowable.class})
 public abstract class MixinProjectile implements Projectile, IProjectile {

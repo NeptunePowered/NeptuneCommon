@@ -24,21 +24,21 @@
 package org.neptunepowered.common;
 
 import net.canarymod.Canary;
-import net.canarymod.commandsys.CommandOwner;
-import net.canarymod.help.HelpManager;
-import net.minecraft.server.MinecraftServer;
-import org.neptunepowered.common.interfaces.command.IMixinServerCommandManager;
-import org.neptunepowered.common.wrapper.NeptuneTranslator;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
+import net.canarymod.commandsys.CommandOwner;
 import net.canarymod.commandsys.DuplicateCommandException;
 import net.canarymod.database.DatabaseLoader;
+import net.canarymod.help.HelpManager;
 import net.canarymod.hook.HookExecutor;
 import net.canarymod.motd.CanaryMessageOfTheDayListener;
 import net.canarymod.motd.MessageOfTheDay;
 import net.canarymod.plugin.DefaultPluginManager;
 import net.canarymod.plugin.PluginLangLoader;
+import net.minecraft.server.MinecraftServer;
+import org.neptunepowered.common.interfaces.command.IMixinServerCommandManager;
+import org.neptunepowered.common.wrapper.NeptuneTranslator;
 import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
 
@@ -87,8 +87,9 @@ public class Neptune extends Canary {
     }
 
     public void lateInitialisation() {
-        if (isInitialised)
+        if (isInitialised) {
             return;
+        }
 
         this.registerCanaryCommands();
         this.initMOTDListener();
