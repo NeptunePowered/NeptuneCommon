@@ -39,6 +39,7 @@ public abstract class MixinClickEvent implements ClickEvent {
         return new NeptuneClickEventAction(action);
     }
 
+    @Override
     @Shadow
     public abstract String getValue();
 }

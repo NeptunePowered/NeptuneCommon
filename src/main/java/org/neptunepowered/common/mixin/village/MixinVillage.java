@@ -39,21 +39,31 @@ public abstract class MixinVillage implements Village {
     @Shadow private int numVillagers;
     @Shadow private int numIronGolems;
 
+    @Shadow
+    public abstract int getReputationForPlayer(String p_82684_1_);
+
+    @Shadow
+    public abstract int setReputationForPlayer(String p_82688_1_, int p_82688_2_);
+
+    @Shadow
+    public abstract boolean isPlayerReputationTooLow(String p_82687_1_);
+
     @Override
     public void setReputationForPlayer(Player player, int rep) {
-
+        setReputationForPlayer(player.getName(), rep);
     }
 
     @Override
     public int getReputationForPlayer(Player player) {
-        return 0;
+        return getReputationForPlayer(player.getName());
     }
 
     @Override
     public boolean isPlayerReputationTooLow(Player player) {
-        return false;
+        return isPlayerReputationTooLow(player.getName());
     }
 
+    @Override
     @Shadow
     public abstract boolean isMatingSeason();
 
@@ -62,6 +72,7 @@ public abstract class MixinVillage implements Village {
         noBreedTicks -= 3600;
     }
 
+    @Override
     @Shadow
     public abstract void endMatingSeason();
 
@@ -85,6 +96,7 @@ public abstract class MixinVillage implements Village {
         return numIronGolems;
     }
 
+    @Override
     @Shadow
     public abstract boolean isAnnihilated();
 }
