@@ -41,6 +41,7 @@ public abstract class MixinItem implements BaseItem {
         return maxStackSize;
     }
 
+    @Override
     @Shadow
     public abstract int getMaxDamage();
 
@@ -49,6 +50,7 @@ public abstract class MixinItem implements BaseItem {
         shadow$setMaxDamage(damage);
     }
 
+    @Override
     @Shadow
     public abstract boolean isDamageable();
 }

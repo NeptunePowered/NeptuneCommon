@@ -161,9 +161,11 @@ public abstract class MixinItemStack implements Item {
 
     }
 
+    @Override
     @Shadow
     public abstract boolean hasDisplayName();
 
+    @Override
     @Shadow
     public abstract String getDisplayName();
 
@@ -177,9 +179,11 @@ public abstract class MixinItemStack implements Item {
         clearCustomName();
     }
 
+    @Override
     @Shadow
     public abstract int getRepairCost();
 
+    @Override
     @Shadow
     public abstract void setRepairCost(int cost);
 

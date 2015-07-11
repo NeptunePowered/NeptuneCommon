@@ -52,9 +52,11 @@ public abstract class MixinDamageSource implements DamageSource {
         return isDamageAllowedInCreativeMode;
     }
 
+    @Override
     @Shadow
     public abstract boolean isFireDamage();
 
+    @Override
     @Shadow
     public abstract boolean isProjectile();
 
@@ -70,9 +72,10 @@ public abstract class MixinDamageSource implements DamageSource {
 
     @Override
     public String getDeathMessage(Player player) {
-        return getDeathMessage(player);
+        return getDeathMessage((EntityLivingBase) player).getUnformattedText();
     }
 
+    @Override
     @Shadow
     public abstract float getHungerDamage();
 
