@@ -69,9 +69,6 @@ import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 import java.util.List;
@@ -108,14 +105,16 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
     @Shadow
     protected abstract void writePlayerData(EntityPlayerMP playerIn);
 
+    @Shadow
+    public abstract int getCurrentPlayerCount();
+
     @Overwrite
     public void playerLoggedOut(EntityPlayerMP playerIn) {
         playerIn.triggerAchievement(StatList.leaveGameStat);
         this.writePlayerData(playerIn);
         WorldServer worldserver = playerIn.getServerForPlayer();
 
-        if (playerIn.ridingEntity != null)
-        {
+        if (playerIn.ridingEntity != null) {
             worldserver.removePlayerEntityDangerously(playerIn.ridingEntity);
             logger.debug("removing player mount");
         }
@@ -131,20 +130,21 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
         for (int i = 0; i < playerEntityList.size(); i++) {
             EntityPlayerMP playerMP = (EntityPlayerMP) this.playerEntityList.get(i);
             PlayerListHook playerListHook = new PlayerListHook(playerListData.copy(), (Player) playerMP);
-            if(!playerListHook.call().isCanceled()) {
+            if (!playerListHook.call().isCanceled()) {
                 S38PacketPlayerListItem packet = new S38PacketPlayerListItem();
                 packet.field_179770_a = S38PacketPlayerListItem.Action.valueOf(PlayerListAction.REMOVE_PLAYER.name());
-                WorldSettings.GameType gameType = WorldSettings.GameType.getByID(playerListHook.getData().getMode().getId());
+                WorldSettings.GameType gameType =
+                        WorldSettings.GameType.getByID(playerListHook.getData().getMode().getId());
                 IChatComponent iChatComponent = playerListHook.getData().displayNameSet() ? ((NeptuneChatComponent)
                         playerListHook.getData().getDisplayName()).getHandle() : null;
-
-                //packet.field_179769_b.add(new S38PacketPlayerListItem.AddPlayerData(playerListHook.getData().getProfile(), playerListHook.getData().getPing(), gameType, iChatComponent));
+                packet.field_179769_b.add(packet.new AddPlayerData(playerListHook.getData()
+                        .getProfile(), playerListHook.getData().getPing(), gameType, iChatComponent));
                 playerMP.playerNetServerHandler.sendPacket(packet);
             }
         }
         // Neptune: end
         //this.sendPacketToAllPlayers(new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.REMOVE_PLAYER, new
-        // EntityPlayerMP[] {playerIn})); // replaced by above code
+        // EntityPlayerMP[] {playerIn})); // Neptune: replaced by above code
     }
 
     @Overwrite
@@ -244,9 +244,6 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
         // Neptune: end
     }
 
-    @Shadow
-    public abstract int getCurrentPlayerCount();
-
     @Override
     public void sendPacketToAllInWorld(String world, Packet packet) {
 
@@ -267,6 +264,7 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
         return null;
     }
 
+    @Override
     @Shadow
     public abstract int getMaxPlayers();
 
