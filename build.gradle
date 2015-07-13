@@ -40,6 +40,7 @@ dependencies {
 license {
     header file('HEADER.txt')
     strictCheck true
+    include "**/*.java"
     mapping {
         java = 'SLASHSTAR_STYLE'
     }

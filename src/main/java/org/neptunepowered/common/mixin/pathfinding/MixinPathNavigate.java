@@ -1,7 +1,7 @@
 /*
  * This file is part of NeptuneCommon, licensed under the MIT License (MIT).
  *
- * Copyright (c) Jamie Mansfield <https://github.com/jamierocks>
+ * Copyright (c) 2015, Jamie Mansfield <https://github.com/jamierocks>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ public abstract class MixinPathNavigate implements PathFinder {
     @Shadow public IAttributeInstance pathSearchRange;
 
     @Shadow
-    public abstract void setSpeed(double p_setSpeed_1_);
+    public abstract void shadow$setSpeed(double p_setSpeed_1_);
 
     @Shadow
     public abstract boolean tryMoveToXYZ(double p_tryMoveToXYZ_1_, double p_tryMoveToXYZ_3_, double p_tryMoveToXYZ_5_,
@@ -73,7 +73,7 @@ public abstract class MixinPathNavigate implements PathFinder {
 
     @Override
     public void setSpeed(float speed) {
-        setSpeed(speed);
+        shadow$setSpeed(speed);
     }
 
     @Override
