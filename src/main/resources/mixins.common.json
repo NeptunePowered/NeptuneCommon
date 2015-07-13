@@ -1,6 +1,8 @@
 {
     "package": "org.neptunepowered.common.mixin",
     "mixins": [
+        "block.material.MixinMaterial",
+        "block.MixinBlock",
         "command.MixinCommandSender",
         "command.MixinServerCommandManager",
         "entity.ai.attributes.MixinAttributeModifier",
