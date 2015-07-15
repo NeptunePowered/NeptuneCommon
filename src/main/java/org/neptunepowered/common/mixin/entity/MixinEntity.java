@@ -52,18 +52,13 @@ public abstract class MixinEntity implements Entity {
     @Shadow public double motionZ;
     @Shadow public float rotationPitch;
     @Shadow public float rotationYaw;
-
-    @Shadow protected boolean isInWeb;
     @Shadow public boolean preventEntitySpawning;
-
-    @Shadow private int entityId;
-    @Shadow protected UUID entityUniqueID;
-
     @Shadow public net.minecraft.world.World worldObj;
-
     @Shadow public net.minecraft.entity.Entity riddenByEntity;
     @Shadow public net.minecraft.entity.Entity ridingEntity;
-
+    @Shadow protected boolean isInWeb;
+    @Shadow protected UUID entityUniqueID;
+    @Shadow private int entityId;
     @Shadow private AxisAlignedBB boundingBox;
 
     @Override
@@ -72,8 +67,18 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
+    public void setX(int x) {
+        this.posX = x;
+    }
+
+    @Override
     public double getY() {
         return posY;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.posY = y;
     }
 
     @Override
@@ -82,8 +87,18 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
+    public void setZ(int z) {
+        this.posZ = z;
+    }
+
+    @Override
     public double getMotionX() {
         return motionX;
+    }
+
+    @Override
+    public void setMotionX(double motionX) {
+        this.motionX = motionX;
     }
 
     @Override
@@ -92,8 +107,18 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
+    public void setMotionY(double motionY) {
+        this.motionY = motionY;
+    }
+
+    @Override
     public double getMotionZ() {
         return motionZ;
+    }
+
+    @Override
+    public void setMotionZ(double motionZ) {
+        this.motionZ = motionZ;
     }
 
     @Override
@@ -102,8 +127,18 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
+    public void setPitch(float pitch) {
+        this.rotationPitch = pitch;
+    }
+
+    @Override
     public float getRotation() {
         return rotationYaw;
+    }
+
+    @Override
+    public void setRotation(float rotation) {
+        this.rotationYaw = rotation;
     }
 
     @Override
@@ -136,53 +171,13 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public void setX(int x) {
-        this.posX = x;
-    }
-
-    @Override
     public void setY(double y) {
-        this.posY = y;
-    }
-
-    @Override
-    public void setY(int y) {
         this.posY = y;
     }
 
     @Override
     public void setZ(double z) {
         this.posZ = z;
-    }
-
-    @Override
-    public void setZ(int z) {
-        this.posZ = z;
-    }
-
-    @Override
-    public void setMotionX(double motionX) {
-        this.motionX = motionX;
-    }
-
-    @Override
-    public void setMotionY(double motionY) {
-        this.motionY = motionY;
-    }
-
-    @Override
-    public void setMotionZ(double motionZ) {
-        this.motionZ = motionZ;
-    }
-
-    @Override
-    public void setPitch(float pitch) {
-        this.rotationPitch = pitch;
-    }
-
-    @Override
-    public void setRotation(float rotation) {
-        this.rotationYaw = rotation;
     }
 
     @Override
@@ -257,13 +252,13 @@ public abstract class MixinEntity implements Entity {
     public abstract void setSneaking(boolean sneaking);
 
     @Override
-    public void setFireTicks(int ticks) {
-
+    public int getFireTicks() {
+        return 0;
     }
 
     @Override
-    public int getFireTicks() {
-        return 0;
+    public void setFireTicks(int ticks) {
+
     }
 
     @Override

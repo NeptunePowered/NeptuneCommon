@@ -36,23 +36,23 @@ import org.spongepowered.asm.mixin.Shadow;
 @Implements(@Interface(iface = Arrow.class, prefix = "arrow$"))
 public abstract class MixinEntityArrow extends Entity {
 
-    @Shadow private boolean inGround;
     @Shadow public Entity shootingEntity;
+    @Shadow public int canBePickedUp;
+    @Shadow private boolean inGround;
     @Shadow private int knockbackStrength;
     @Shadow private int ticksInGround;
     @Shadow private int ticksInAir;
     @Shadow private double damage;
-    @Shadow public int canBePickedUp;
+
+    public MixinEntityArrow(World worldIn) {
+        super(worldIn);
+    }
 
     @Shadow
     public abstract boolean getIsCritical();
 
     @Shadow
     public abstract void setIsCritical(boolean critical);
-
-    public MixinEntityArrow(World worldIn) {
-        super(worldIn);
-    }
 
     public boolean arrow$canPickUp() {
         return canBePickedUp == 1 ? true : false;

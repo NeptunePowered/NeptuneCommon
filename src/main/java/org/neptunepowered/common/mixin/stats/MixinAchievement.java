@@ -33,8 +33,8 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Achievement.class)
 public abstract class MixinAchievement extends StatBase implements net.canarymod.api.statistics.Achievement {
 
-    @Shadow private String achievementDescription;
     @Shadow public Achievement parentAchievement;
+    @Shadow private String achievementDescription;
     @Shadow private boolean isSpecial;
 
     public MixinAchievement(String p_i45307_1_, IChatComponent p_i45307_2_, IStatType p_i45307_3_) {

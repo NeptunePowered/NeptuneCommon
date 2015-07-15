@@ -35,10 +35,10 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(net.minecraft.util.DamageSource.class)
 public abstract class MixinDamageSource implements DamageSource {
 
+    @Shadow public String damageType;
     @Shadow private boolean isDamageAllowedInCreativeMode;
     @Shadow private boolean fireDamage;
     @Shadow private float hungerDamage;
-    @Shadow public String damageType;
     @Shadow private boolean damageIsAbsolute;
 
     @Shadow

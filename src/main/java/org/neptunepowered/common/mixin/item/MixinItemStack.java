@@ -37,9 +37,9 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack implements Item {
 
+    @Shadow public int stackSize;
     @Shadow private net.minecraft.item.Item item;
     @Shadow private int itemDamage;
-    @Shadow public int stackSize;
 
     @Shadow
     public abstract boolean isItemEnchantable();
@@ -102,13 +102,13 @@ public abstract class MixinItemStack implements Item {
     }
 
     @Override
-    public ItemType getType() {
-        return ItemType.fromId(getId());
+    public void setSlot(int slot) {
+
     }
 
     @Override
-    public void setSlot(int slot) {
-
+    public ItemType getType() {
+        return ItemType.fromId(getId());
     }
 
     @Override
@@ -142,12 +142,12 @@ public abstract class MixinItemStack implements Item {
     }
 
     @Override
-    public void addEnchantments(Enchantment... enchantments) {
+    public void setEnchantments(Enchantment... enchantments) {
 
     }
 
     @Override
-    public void setEnchantments(Enchantment... enchantments) {
+    public void addEnchantments(Enchantment... enchantments) {
 
     }
 

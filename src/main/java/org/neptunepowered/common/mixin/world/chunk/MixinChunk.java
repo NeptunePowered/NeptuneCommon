@@ -113,6 +113,11 @@ public abstract class MixinChunk implements net.canarymod.api.world.Chunk {
     }
 
     @Override
+    public void setBiomeData(byte[] data) {
+        blockBiomeArray = data;
+    }
+
+    @Override
     public byte[] getBiomeByteData() {
         return blockBiomeArray;
     }
@@ -120,11 +125,6 @@ public abstract class MixinChunk implements net.canarymod.api.world.Chunk {
     @Override
     public void setBiomeData(BiomeType[] data) {
 
-    }
-
-    @Override
-    public void setBiomeData(byte[] data) {
-        blockBiomeArray = data;
     }
 
     @Override

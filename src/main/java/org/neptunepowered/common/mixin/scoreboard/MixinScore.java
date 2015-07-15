@@ -68,13 +68,13 @@ public abstract class MixinScore implements net.canarymod.api.scoreboard.Score {
     }
 
     @Override
-    public void setScore(int toSet) {
-        setScorePoints(toSet);
+    public int getScore() {
+        return getScorePoints();
     }
 
     @Override
-    public int getScore() {
-        return getScorePoints();
+    public void setScore(int toSet) {
+        setScorePoints(toSet);
     }
 
     @Override

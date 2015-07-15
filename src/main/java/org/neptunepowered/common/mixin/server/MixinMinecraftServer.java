@@ -58,9 +58,9 @@ import java.util.UUID;
 public abstract class MixinMinecraftServer implements Server {
 
     @Shadow public String hostname;
+    @Shadow public long[] tickTimeArray;
     @Shadow private int tickCounter;
     @Shadow private boolean serverRunning;
-    @Shadow public long[] tickTimeArray;
     @Shadow private ServerConfigurationManager serverConfigManager;
 
     @Shadow

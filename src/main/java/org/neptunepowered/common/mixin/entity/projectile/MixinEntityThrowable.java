@@ -38,9 +38,8 @@ import org.spongepowered.asm.mixin.Shadow;
 @Implements(@Interface(iface = EntityThrowable.class, prefix = "throw$"))
 public abstract class MixinEntityThrowable extends Entity {
 
-    @Shadow private EntityLivingBase thrower;
-
     protected float gravity = 0.3f;
+    @Shadow private EntityLivingBase thrower;
 
     public MixinEntityThrowable(World worldIn) {
         super(worldIn);

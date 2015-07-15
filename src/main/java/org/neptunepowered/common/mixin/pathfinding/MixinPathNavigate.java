@@ -38,8 +38,8 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(PathNavigate.class)
 public abstract class MixinPathNavigate implements PathFinder {
 
-    @Shadow protected double speed;
     @Shadow public IAttributeInstance pathSearchRange;
+    @Shadow protected double speed;
 
     @Shadow
     public abstract void shadow$setSpeed(double p_setSpeed_1_);

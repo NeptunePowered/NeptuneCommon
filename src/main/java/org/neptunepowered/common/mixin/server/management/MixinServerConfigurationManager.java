@@ -77,10 +77,10 @@ import java.util.Map;
 @Mixin(ServerConfigurationManager.class)
 public abstract class MixinServerConfigurationManager implements ConfigurationManager {
 
-    @Shadow private Logger logger;
-    @Shadow private MinecraftServer mcServer;
     @Shadow public List playerEntityList;
     @Shadow public Map uuidToPlayerMap;
+    @Shadow private Logger logger;
+    @Shadow private MinecraftServer mcServer;
     @Shadow private Map playerStatFiles;
 
     @Shadow
