@@ -42,15 +42,19 @@ public abstract class MixinAttributeModifier implements AttributeModifier {
         return id;
     }
 
+    @Override
     @Shadow
     public abstract String getName();
 
+    @Override
     @Shadow
     public abstract int getOperation();
 
+    @Override
     @Shadow
     public abstract double getAmount();
 
+    @Override
     @Shadow
     public abstract boolean isSaved();
 

@@ -36,12 +36,15 @@ public abstract class MixinPotionEffect implements PotionEffect {
     @Shadow
     public abstract String getEffectName();
 
+    @Override
     @Shadow
     public abstract int getPotionID();
 
+    @Override
     @Shadow
     public abstract int getDuration();
 
+    @Override
     @Shadow
     public abstract int getAmplifier();
 

@@ -46,6 +46,7 @@ public abstract class MixinRangedAttribute extends BaseAttribute {
     @Shadow
     public abstract net.minecraft.entity.ai.attributes.RangedAttribute setDescription(String descriptionIn);
 
+    @Override
     @Shadow
     public abstract double clampValue(double p_111109_1_);
 

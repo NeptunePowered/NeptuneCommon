@@ -34,9 +34,11 @@ public abstract class MixinEntityAIBase implements AIBase {
     @Shadow
     public abstract boolean isInterruptible();
 
+    @Override
     @Shadow
     public abstract boolean shouldExecute();
 
+    @Override
     @Shadow
     public abstract boolean continueExecuting();
 
@@ -45,12 +47,15 @@ public abstract class MixinEntityAIBase implements AIBase {
         return isInterruptible();
     }
 
+    @Override
     @Shadow
     public abstract void startExecuting();
 
+    @Override
     @Shadow
     public abstract void resetTask();
 
+    @Override
     @Shadow
     public abstract void updateTask();
 }

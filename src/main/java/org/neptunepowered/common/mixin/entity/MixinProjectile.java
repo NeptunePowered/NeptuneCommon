@@ -32,6 +32,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin({EntityArrow.class, EntityThrowable.class})
 public abstract class MixinProjectile implements Projectile, IProjectile {
 
+    @Override
     public void setProjectileHeading(double motionX, double motionY, double motionZ, float rotationYaw,
             float rotationPitch) {
         setThrowableHeading(motionX, motionY, motionZ, rotationYaw, rotationPitch);

@@ -58,6 +58,7 @@ public abstract class MixinBaseAttributeMap implements AttributeMap {
         return null;
     }
 
+    @Override
     @Shadow
     public abstract Collection<ModifiedAttribute> getAllAttributes();
 

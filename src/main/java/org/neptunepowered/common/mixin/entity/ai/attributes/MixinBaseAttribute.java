@@ -42,6 +42,7 @@ public abstract class MixinBaseAttribute implements Attribute {
         return unlocalizedName;
     }
 
+    @Override
     @Shadow
     public abstract double getDefaultValue();
 

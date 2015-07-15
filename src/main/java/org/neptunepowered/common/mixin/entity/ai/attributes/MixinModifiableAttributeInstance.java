@@ -55,9 +55,11 @@ public abstract class MixinModifiableAttributeInstance implements ModifiedAttrib
         return (Attribute) genericAttribute;
     }
 
+    @Override
     @Shadow
     public abstract double getBaseValue();
 
+    @Override
     @Shadow
     public abstract void setBaseValue(double value);
 

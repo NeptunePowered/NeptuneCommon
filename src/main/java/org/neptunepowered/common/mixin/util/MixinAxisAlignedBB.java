@@ -140,6 +140,7 @@ public abstract class MixinAxisAlignedBB implements BoundingBox {
         return intersectsWith((AxisAlignedBB) other);
     }
 
+    @Override
     @Shadow
     public abstract double getAverageEdgeLength();
 }

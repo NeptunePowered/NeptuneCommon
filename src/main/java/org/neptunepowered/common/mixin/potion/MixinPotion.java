@@ -39,6 +39,7 @@ public abstract class MixinPotion implements net.canarymod.api.potion.Potion {
         return id;
     }
 
+    @Override
     @Shadow
     public abstract String getName();
 
@@ -52,12 +53,15 @@ public abstract class MixinPotion implements net.canarymod.api.potion.Potion {
         return isBadEffect;
     }
 
+    @Override
     @Shadow
     public abstract double getEffectiveness();
 
+    @Override
     @Shadow
     public abstract boolean isUsable();
 
+    @Override
     @Shadow
     public abstract boolean isInstant();
 }
