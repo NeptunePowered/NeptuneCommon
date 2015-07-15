@@ -39,6 +39,7 @@
         "scoreboard.MixinScore",
         "scoreboard.MixinScoreboardObjective",
         "scoreboard.MixinScoreObjective",
+        "scoreboard.MixinScorePlayerTeam",
         "server.dedicated.MixinDedicatedServer",
         "server.management.MixinServerConfigurationManager",
         "server.network.MixinNetHandlerHandshakeTCP",
