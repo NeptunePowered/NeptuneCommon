@@ -55,15 +55,13 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
     public abstract void setNameSuffix(String suffix);
 
     @Shadow
-    public abstract boolean func_98297_h();
-    // This has been updated as of 15th July 2015, however no deploy has been made as of now
+    public abstract boolean getSeeFriendlyInvisiblesEnabled();
 
     @Shadow
     public abstract void setSeeFriendlyInvisiblesEnabled(boolean friendlyInvisibles);
 
     @Shadow
-    public abstract String func_96669_c();
-    // This has been updated as of 15th July 2015, however no deploy has been made as of now
+    public abstract String getTeamName();
 
     @Shadow
     public abstract void setTeamName(String name);
@@ -75,7 +73,7 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
 
     @Override
     public String getDisplayName() {
-        return func_96669_c();
+        return getTeamName();
     }
 
     @Override
@@ -149,7 +147,7 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
 
     @Override
     public boolean getSeeFriendlyInvisibles() {
-        return func_98297_h();
+        return getSeeFriendlyInvisiblesEnabled();
     }
 
     @Override

@@ -32,7 +32,7 @@ minecraft {
         version = minecraftVersion
     }
 
-    mappings = 'snapshot_20150326'
+    mappings = 'snapshot_20150717'
 }
 
 javadoc {
