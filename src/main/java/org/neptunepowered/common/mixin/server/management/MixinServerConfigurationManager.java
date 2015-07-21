@@ -132,12 +132,12 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
             PlayerListHook playerListHook = new PlayerListHook(playerListData.copy(), (Player) playerMP);
             if (!playerListHook.call().isCanceled()) {
                 S38PacketPlayerListItem packet = new S38PacketPlayerListItem();
-                packet.field_179770_a = S38PacketPlayerListItem.Action.valueOf(PlayerListAction.REMOVE_PLAYER.name());
+                packet.action = S38PacketPlayerListItem.Action.valueOf(PlayerListAction.REMOVE_PLAYER.name());
                 WorldSettings.GameType gameType =
                         WorldSettings.GameType.getByID(playerListHook.getData().getMode().getId());
                 IChatComponent iChatComponent = playerListHook.getData().displayNameSet() ? ((NeptuneChatComponent)
                         playerListHook.getData().getDisplayName()).getHandle() : null;
-                packet.field_179769_b.add(packet.new AddPlayerData(playerListHook.getData()
+                packet.players.add(packet.new AddPlayerData(playerListHook.getData()
                         .getProfile(), playerListHook.getData().getPing(), gameType, iChatComponent));
                 playerMP.playerNetServerHandler.sendPacket(packet);
             }
@@ -184,7 +184,7 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
         nethandlerplayserver.sendPacket(new S39PacketPlayerAbilities(playerIn.capabilities));
         nethandlerplayserver.sendPacket(new S09PacketHeldItemChange(playerIn.inventory.currentItem));
         playerIn.getStatFile().func_150877_d();
-        playerIn.getStatFile().func_150884_b(playerIn);
+        playerIn.getStatFile().sendAchievements(playerIn);
         this.func_96456_a((ServerScoreboard) worldserver.getScoreboard(), playerIn);
         this.mcServer.refreshStatusNextTick();
         ChatComponentTranslation chatcomponenttranslation;

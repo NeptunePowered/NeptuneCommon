@@ -40,7 +40,6 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
     @Shadow private net.minecraft.scoreboard.Scoreboard theScoreboard;
     @Shadow private Set membershipSet;
     @Shadow private String registeredName;
-    @Shadow private boolean canSeeFriendlyInvisibles;
 
     @Shadow
     public abstract String getColorPrefix();

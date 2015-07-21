@@ -37,7 +37,7 @@
         "potion.MixinPotion",
         "potion.MixinPotionEffect",
         "scoreboard.MixinScore",
-        "scoreboard.MixinScoreboardObjective",
+        "scoreboard.MixinScoreboard",
         "scoreboard.MixinScoreObjective",
         "scoreboard.MixinScorePlayerTeam",
         "server.dedicated.MixinDedicatedServer",
