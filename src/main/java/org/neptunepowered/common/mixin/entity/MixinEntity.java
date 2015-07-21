@@ -56,10 +56,18 @@ public abstract class MixinEntity implements Entity {
     @Shadow public net.minecraft.world.World worldObj;
     @Shadow public net.minecraft.entity.Entity riddenByEntity;
     @Shadow public net.minecraft.entity.Entity ridingEntity;
+    @Shadow public boolean onGround;
     @Shadow protected boolean isInWeb;
+    @Shadow public boolean isDead;
     @Shadow protected UUID entityUniqueID;
     @Shadow private int entityId;
     @Shadow private AxisAlignedBB boundingBox;
+
+    @Shadow
+    public abstract void setDead();
+
+    @Shadow
+    protected abstract boolean getFlag(int flag);
 
     @Override
     public double getX() {
@@ -143,12 +151,12 @@ public abstract class MixinEntity implements Entity {
 
     @Override
     public Position getPosition() {
-        return null;
+        return new Position(getX(), getY(), getZ());
     }
 
     @Override
     public Location getLocation() {
-        return null;
+        return new Location(getWorld(), getX(), getY(), getZ(), getPitch(), getRotation());
     }
 
     @Override
@@ -368,12 +376,12 @@ public abstract class MixinEntity implements Entity {
 
     @Override
     public void destroy() {
-
+        setDead();
     }
 
     @Override
     public boolean isDead() {
-        return false;
+        return this.isDead;
     }
 
     @Override
@@ -411,7 +419,7 @@ public abstract class MixinEntity implements Entity {
 
     @Override
     public boolean isOnGround() {
-        return false;
+        return this.onGround;
     }
 
     @Override
@@ -420,9 +428,8 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public boolean isInWater() {
-        return false;
-    }
+    @Shadow
+    public abstract boolean isInWater();
 
     @Override
     @Shadow
@@ -455,7 +462,7 @@ public abstract class MixinEntity implements Entity {
 
     @Override
     public boolean isEating() {
-        return false;
+        return getFlag(4);
     }
 
     @Override
