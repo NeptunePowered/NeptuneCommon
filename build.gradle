@@ -17,6 +17,7 @@ buildscript {
     }
 }
 apply plugin: 'net.minecrell.vanilla.base'
+ext.minecraftPlugin = plugins.getPlugin('net.minecrell.vanilla.base')
 apply plugin: 'license'
 apply from: 'gradle/minecraft.gradle'
 

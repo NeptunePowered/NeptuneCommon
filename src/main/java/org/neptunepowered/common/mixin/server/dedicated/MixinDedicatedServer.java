@@ -24,6 +24,7 @@
 package org.neptunepowered.common.mixin.server.dedicated;
 
 import net.canarymod.Canary;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import org.neptunepowered.common.Neptune;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,13 +32,25 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.Proxy;
+
 @Mixin(DedicatedServer.class)
-public class MixinDedicatedServer {
+public abstract class MixinDedicatedServer extends MinecraftServer {
+
+    public MixinDedicatedServer(Proxy proxy, File workDir) {
+        super(proxy, workDir);
+    }
+
+    public MixinDedicatedServer(File workDir, Proxy proxy, File profileCacheDir) {
+        super(workDir, proxy, profileCacheDir);
+    }
 
     @Inject(method = "startServer()Z", at = @At(value = "INVOKE",
-            target = "loadAllWorlds(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/WorldType;"
-                    + "Ljava/lang/String;)V"))
-    public void onStartServer(CallbackInfoReturnable<Boolean> ci) {
+            target = "Lnet/minecraft/server/MinecraftServer;loadAllWorlds(Ljava/lang/String;Ljava/lang/String;"
+                    + "JLnet/minecraft/world/WorldType;Ljava/lang/String;)V"))
+    public void onStartServer(CallbackInfoReturnable<Boolean> ci) throws IOException {
         Canary.enableEarlyPlugins();
         ((Neptune) Canary.instance()).lateInitialisation();
         Canary.enableLatePlugins();

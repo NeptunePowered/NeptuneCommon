@@ -91,7 +91,7 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
             net.minecraft.world.World worldIn);
 
     @Shadow
-    protected abstract void func_96456_a(ServerScoreboard scoreboardIn, EntityPlayerMP playerIn);
+    protected abstract void sendScoreboard(ServerScoreboard scoreboardIn, EntityPlayerMP playerIn);
 
     @Shadow
     public abstract void sendChatMsg(IChatComponent component);
@@ -185,7 +185,7 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
         nethandlerplayserver.sendPacket(new S09PacketHeldItemChange(playerIn.inventory.currentItem));
         playerIn.getStatFile().func_150877_d();
         playerIn.getStatFile().sendAchievements(playerIn);
-        this.func_96456_a((ServerScoreboard) worldserver.getScoreboard(), playerIn);
+        this.sendScoreboard((ServerScoreboard) worldserver.getScoreboard(), playerIn);
         this.mcServer.refreshStatusNextTick();
         ChatComponentTranslation chatcomponenttranslation;
 

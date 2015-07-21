@@ -57,8 +57,8 @@ public abstract class MixinEntity implements Entity {
     @Shadow public net.minecraft.entity.Entity riddenByEntity;
     @Shadow public net.minecraft.entity.Entity ridingEntity;
     @Shadow public boolean onGround;
-    @Shadow protected boolean isInWeb;
     @Shadow public boolean isDead;
+    @Shadow protected boolean isInWeb;
     @Shadow protected UUID entityUniqueID;
     @Shadow private int entityId;
     @Shadow private AxisAlignedBB boundingBox;
@@ -75,6 +75,11 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
+    public void setX(double x) {
+        this.posX = x;
+    }
+
+    @Override
     public void setX(int x) {
         this.posX = x;
     }
@@ -85,6 +90,11 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
+    public void setY(double y) {
+        this.posY = y;
+    }
+
+    @Override
     public void setY(int y) {
         this.posY = y;
     }
@@ -92,6 +102,11 @@ public abstract class MixinEntity implements Entity {
     @Override
     public double getZ() {
         return posZ;
+    }
+
+    @Override
+    public void setZ(double z) {
+        this.posZ = z;
     }
 
     @Override
@@ -171,21 +186,6 @@ public abstract class MixinEntity implements Entity {
     @Override
     public UUID getUUID() {
         return entityUniqueID;
-    }
-
-    @Override
-    public void setX(double x) {
-        this.posX = x;
-    }
-
-    @Override
-    public void setY(double y) {
-        this.posY = y;
-    }
-
-    @Override
-    public void setZ(double z) {
-        this.posZ = z;
     }
 
     @Override

@@ -1,5 +1,6 @@
 {
     "package": "org.neptunepowered.common.mixin",
+    "refmap": "mixins.common.refmap.json",
     "mixins": [
         "block.material.MixinMaterial",
         "block.MixinBlock",

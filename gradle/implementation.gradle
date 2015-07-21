@@ -26,6 +26,8 @@ evaluationDependsOn common.path
 shadowJar {
     classifier = ''
 
+    from project.mixinRefMap
+
     exclude 'GradleStart**'
     exclude 'net/minecraftforge/**'
 
