@@ -34,7 +34,7 @@ shadowJar {
     dependencies {
         // Common
         include project(common.path)
-        include dependency('net.canarymod:canarylib')
+        include dependency('net.canarymod:CanaryLib')
         include dependency('org.spongepowered:mixin')
 
         // CanaryLib
