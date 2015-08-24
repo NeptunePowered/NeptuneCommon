@@ -64,7 +64,6 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.storage.WorldInfo;
-import org.apache.logging.log4j.Logger;
 import org.neptunepowered.common.wrapper.chat.NeptuneChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -79,7 +78,6 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
 
     @Shadow public List playerEntityList;
     @Shadow public Map uuidToPlayerMap;
-    @Shadow private Logger logger;
     @Shadow private MinecraftServer mcServer;
     @Shadow private Map playerStatFiles;
 
@@ -116,7 +114,7 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
 
         if (playerIn.ridingEntity != null) {
             worldserver.removePlayerEntityDangerously(playerIn.ridingEntity);
-            logger.debug("removing player mount");
+            ServerConfigurationManager.logger.debug("removing player mount");
         }
 
         worldserver.removeEntity(playerIn);
@@ -163,8 +161,9 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
             s1 = netManager.getRemoteAddress().toString();
         }
 
-        logger.info(playerIn.getCommandSenderName() + "[" + s1 + "] logged in with entity id " + playerIn.getEntityId()
-                + " at (" + playerIn.posX + ", " + playerIn.posY + ", " + playerIn.posZ + ")");
+        ServerConfigurationManager.logger
+                .info(playerIn.getCommandSenderName() + "[" + s1 + "] logged in with entity id " + playerIn
+                        .getEntityId() + " at (" + playerIn.posX + ", " + playerIn.posY + ", " + playerIn.posZ + ")");
         WorldServer worldserver = this.mcServer.worldServerForDimension(playerIn.dimension);
         WorldInfo worldinfo = worldserver.getWorldInfo();
         BlockPos blockpos = worldserver.getSpawnPoint();

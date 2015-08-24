@@ -24,6 +24,8 @@ dependencies {
 evaluationDependsOn common.path
 
 shadowJar {
+    dependsOn common.tasks.reobf
+
     classifier = ''
 
     from project.mixinRefMap
@@ -49,3 +51,9 @@ shadowJar {
     }
 }
 assemble.dependsOn shadowJar
+
+reobf {
+    reobf(shadowJar) { spec ->
+        spec.classpath = configurations.compile
+    }
+}

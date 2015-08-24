@@ -51,12 +51,15 @@ setupDecompWorkspace.dependsOn copySrgs
 setupDevWorkspace.dependsOn copySrgs
 compileJava.dependsOn copySrgs
 
-
 // Configure reobfuscation for mixins
 reobf.doFirst {
     if (project.mixinSrg.exists()) {
         addExtraSrgFile project.mixinSrg
     }
+}
+
+jar {
+    from project.mixinRefMap
 }
 
 ext.minecraftVersion = '1.8'
