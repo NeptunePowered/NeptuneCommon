@@ -24,6 +24,7 @@
 package org.neptunepowered.common.mixin.entity.projectile;
 
 import net.canarymod.api.entity.Arrow;
+import net.canarymod.api.entity.EntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.world.World;
@@ -53,6 +54,10 @@ public abstract class MixinEntityArrow extends Entity {
 
     @Shadow
     public abstract void setIsCritical(boolean critical);
+
+    public EntityType arrow$getEntityType() {
+        return EntityType.ARROW;
+    }
 
     public boolean arrow$canPickUp() {
         return canBePickedUp == 1 ? true : false;

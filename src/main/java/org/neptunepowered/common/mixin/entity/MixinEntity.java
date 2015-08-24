@@ -408,11 +408,6 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public EntityType getEntityType() {
-        return null;
-    }
-
-    @Override
     public boolean isAmbient() {
         return false;
     }

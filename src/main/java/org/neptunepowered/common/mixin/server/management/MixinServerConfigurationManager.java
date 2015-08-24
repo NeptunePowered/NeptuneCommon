@@ -201,7 +201,7 @@ public abstract class MixinServerConfigurationManager implements ConfigurationMa
         // Neptune: start
         ConnectionHook hook = (ConnectionHook)
                 new ConnectionHook(
-                        (Player) playerIn, chatcomponenttranslation.getFormattedText(), false
+                        (Player) playerIn, chatcomponenttranslation.getKey(), false
                 ).call();
         if (!hook.isHidden()) {
             this.sendChatMsg(chatcomponenttranslation);

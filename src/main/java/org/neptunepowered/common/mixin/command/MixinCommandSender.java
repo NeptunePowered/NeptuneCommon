@@ -29,6 +29,7 @@ import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.chat.ChatFormat;
 import net.canarymod.chat.MessageReceiver;
 import net.canarymod.chat.ReceiverType;
+import net.canarymod.exceptions.InvalidInstanceException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -113,22 +114,37 @@ public abstract class MixinCommandSender implements MessageReceiver, ICommandSen
 
     @Override
     public ReceiverType getReceiverType() {
-        return null;
+        if (this instanceof Player) {
+            return ReceiverType.PLAYER;
+        } else if (this instanceof net.canarymod.api.CommandBlockLogic) {
+            return ReceiverType.COMMANDBLOCK;
+        } else{
+            return ReceiverType.SERVER;
+        }
     }
 
     @Override
     public Player asPlayer() {
-        return null;
+        if (this instanceof Player) {
+            return (Player) this;
+        }
+        throw new InvalidInstanceException("This is not a MessageReceiver of the type: PLAYER");
     }
 
     @Override
     public Server asServer() {
-        return null;
+        if (this instanceof Server) {
+            return (Server) this;
+        }
+        throw new InvalidInstanceException("This is not a MessageReceiver of the type: SERVER");
     }
 
     @Override
     public net.canarymod.api.CommandBlockLogic asCommandBlock() {
-        return null;
+        if (this instanceof net.canarymod.api.CommandBlockLogic) {
+            return (net.canarymod.api.CommandBlockLogic) this;
+        }
+        throw new InvalidInstanceException("This is not a MessageReceiver of the type: COMMANDBLOCK");
     }
 
     @Override
