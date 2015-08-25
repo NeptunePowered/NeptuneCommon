@@ -28,7 +28,7 @@ import net.canarymod.api.chat.ChatComponent;
 import net.canarymod.api.chat.ChatStyle;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
-import org.neptunepowered.common.interfaces.util.IMixinChatComponentText;
+import org.neptunepowered.common.interfaces.minecraft.util.IMixinChatComponentText;
 import org.neptunepowered.common.util.Wrapper;
 
 import java.util.List;

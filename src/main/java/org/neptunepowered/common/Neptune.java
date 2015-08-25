@@ -37,7 +37,7 @@ import net.canarymod.motd.MessageOfTheDay;
 import net.canarymod.plugin.DefaultPluginManager;
 import net.canarymod.plugin.PluginLangLoader;
 import net.minecraft.server.MinecraftServer;
-import org.neptunepowered.common.interfaces.command.IMixinServerCommandManager;
+import org.neptunepowered.common.interfaces.minecraft.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.NeptuneTranslator;
 import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
