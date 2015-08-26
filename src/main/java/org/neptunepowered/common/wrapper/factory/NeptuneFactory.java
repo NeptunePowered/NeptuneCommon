@@ -50,51 +50,51 @@ public class NeptuneFactory implements Factory {
 
     @Override
     public ItemFactory getItemFactory() {
-        return itemFactory;
+        return this.itemFactory;
     }
 
     @Override
     public PotionFactory getPotionFactory() {
-        return potionFactory;
+        return this.potionFactory;
     }
 
     @Override
     public EntityFactory getEntityFactory() {
-        return entityFactory;
+        return this.entityFactory;
     }
 
     @Override
     public ObjectFactory getObjectFactory() {
-        return objectFactory;
+        return this.objectFactory;
     }
 
     @Override
     public NBTFactory getNBTFactory() {
-        return nbtFactory;
+        return this.nbtFactory;
     }
 
     @Override
     public PacketFactory getPacketFactory() {
-        return packetFactory;
+        return this.packetFactory;
     }
 
     @Override
     public ChatComponentFactory getChatComponentFactory() {
-        return chatComponentFactory;
+        return this.chatComponentFactory;
     }
 
     @Override
     public AttributeFactory getAttributeFactory() {
-        return attributeFactory;
+        return this.attributeFactory;
     }
 
     @Override
     public StatisticsFactory getStatisticsFactory() {
-        return statisticsFactory;
+        return this.statisticsFactory;
     }
 
     @Override
     public AIFactory getAIFactory() {
-        return aiFactory;
+        return this.aiFactory;
     }
 }

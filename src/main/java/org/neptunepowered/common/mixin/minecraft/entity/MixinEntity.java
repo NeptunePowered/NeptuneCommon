@@ -75,12 +75,12 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public void setX(double x) {
+    public void setX(int x) {
         this.posX = x;
     }
 
     @Override
-    public void setX(int x) {
+    public void setX(double x) {
         this.posX = x;
     }
 
@@ -90,12 +90,12 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public void setY(double y) {
+    public void setY(int y) {
         this.posY = y;
     }
 
     @Override
-    public void setY(int y) {
+    public void setY(double y) {
         this.posY = y;
     }
 
@@ -105,12 +105,12 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public void setZ(double z) {
+    public void setZ(int z) {
         this.posZ = z;
     }
 
     @Override
-    public void setZ(int z) {
+    public void setZ(double z) {
         this.posZ = z;
     }
 

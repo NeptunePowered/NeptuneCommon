@@ -287,13 +287,13 @@ public abstract class MixinEntityPlayerMP extends MixinEntityPlayer implements P
     }
 
     @Override
-    public boolean isOnline() {
-        return false;
+    public void setGroup(Group group) {
+
     }
 
     @Override
-    public void setGroup(Group group) {
-
+    public boolean isOnline() {
+        return false;
     }
 
     @Override
@@ -357,13 +357,13 @@ public abstract class MixinEntityPlayerMP extends MixinEntityPlayer implements P
     }
 
     @Override
-    public int getModeId() {
-        return 0;
+    public void setMode(GameMode mode) {
+
     }
 
     @Override
-    public void setMode(GameMode mode) {
-
+    public int getModeId() {
+        return 0;
     }
 
     @Override
@@ -432,13 +432,13 @@ public abstract class MixinEntityPlayerMP extends MixinEntityPlayer implements P
     }
 
     @Override
-    public void setHunger(int hunger) {
-
+    public int getHunger() {
+        return 0;
     }
 
     @Override
-    public int getHunger() {
-        return 0;
+    public void setHunger(int hunger) {
+
     }
 
     @Override
@@ -482,13 +482,13 @@ public abstract class MixinEntityPlayerMP extends MixinEntityPlayer implements P
     }
 
     @Override
-    public void setHome(Location loc) {
-
+    public Location getHome() {
+        return null;
     }
 
     @Override
-    public Location getHome() {
-        return null;
+    public void setHome(Location loc) {
+
     }
 
     @Override

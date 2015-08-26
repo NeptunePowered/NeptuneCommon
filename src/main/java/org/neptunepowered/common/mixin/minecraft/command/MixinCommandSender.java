@@ -118,7 +118,7 @@ public abstract class MixinCommandSender implements MessageReceiver, ICommandSen
             return ReceiverType.PLAYER;
         } else if (this instanceof net.canarymod.api.CommandBlockLogic) {
             return ReceiverType.COMMANDBLOCK;
-        } else{
+        } else {
             return ReceiverType.SERVER;
         }
     }

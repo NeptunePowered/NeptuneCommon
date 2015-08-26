@@ -40,6 +40,8 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
     @Shadow private net.minecraft.scoreboard.Scoreboard theScoreboard;
     @Shadow private Set membershipSet;
     @Shadow private String registeredName;
+    @Shadow private boolean canSeeFriendlyInvisibles;
+    @Shadow private String teamNameSPT;
 
     @Shadow
     public abstract String getColorPrefix();
@@ -54,13 +56,7 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
     public abstract void setNameSuffix(String suffix);
 
     @Shadow
-    public abstract boolean getSeeFriendlyInvisiblesEnabled();
-
-    @Shadow
     public abstract void setSeeFriendlyInvisiblesEnabled(boolean friendlyInvisibles);
-
-    @Shadow
-    public abstract String getTeamName();
 
     @Shadow
     public abstract void setTeamName(String name);
@@ -72,7 +68,7 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
 
     @Override
     public String getDisplayName() {
-        return getTeamName();
+        return this.teamNameSPT;
     }
 
     @Override
@@ -146,7 +142,7 @@ public abstract class MixinScorePlayerTeam extends net.minecraft.scoreboard.Team
 
     @Override
     public boolean getSeeFriendlyInvisibles() {
-        return getSeeFriendlyInvisiblesEnabled();
+        return this.canSeeFriendlyInvisibles;
     }
 
     @Override

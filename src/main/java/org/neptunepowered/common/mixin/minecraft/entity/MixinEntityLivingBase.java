@@ -162,23 +162,23 @@ public abstract class MixinEntityLivingBase extends MixinEntity implements Livin
     }
 
     @Override
-    public void setRevengeTarget(LivingBase target) {
-
-    }
-
-    @Override
     public LivingBase getRevengeTarget() {
         return null;
     }
 
     @Override
-    public void setLastAssailant(LivingBase entity) {
+    public void setRevengeTarget(LivingBase target) {
 
     }
 
     @Override
     public LivingBase getLastAssailant() {
         return null;
+    }
+
+    @Override
+    public void setLastAssailant(LivingBase entity) {
+
     }
 
     @Override
