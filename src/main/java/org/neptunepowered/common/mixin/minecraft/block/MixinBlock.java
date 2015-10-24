@@ -82,6 +82,7 @@ public abstract class MixinBlock implements BlockBase {
         return false;
     }
 
+    @Shadow
     @Override
     public abstract boolean isFullCube();
 

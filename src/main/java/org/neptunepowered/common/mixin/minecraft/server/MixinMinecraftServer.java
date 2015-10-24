@@ -57,7 +57,6 @@ import java.util.UUID;
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer implements Server {
 
-    @Shadow public String hostname;
     @Shadow public long[] tickTimeArray;
     @Shadow private int tickCounter;
     @Shadow private boolean serverRunning;
@@ -71,7 +70,7 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public String getHostname() {
-        return hostname;
+        return null;
     }
 
     @Override
