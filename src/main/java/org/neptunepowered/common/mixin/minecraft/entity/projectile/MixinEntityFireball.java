@@ -23,62 +23,34 @@
  */
 package org.neptunepowered.common.mixin.minecraft.entity.projectile;
 
-import net.canarymod.api.entity.Arrow;
-import net.canarymod.api.entity.Entity;
-import net.canarymod.api.entity.EntityType;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.canarymod.api.entity.Fireball;
+import net.canarymod.api.entity.living.LivingBase;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityFireball;
 import org.neptunepowered.common.mixin.minecraft.entity.MixinEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(EntityArrow.class)
-public abstract class MixinEntityArrow extends MixinEntity implements Arrow {
+@Mixin(EntityFireball.class)
+public abstract class MixinEntityFireball extends MixinEntity implements Fireball {
 
-    @Shadow public net.minecraft.entity.Entity shootingEntity;
-    @Shadow public int canBePickedUp;
-    @Shadow private boolean inGround;
-    @Shadow private int knockbackStrength;
-    @Shadow private int ticksInGround;
+    @Shadow private int ticksAlive;
     @Shadow private int ticksInAir;
-
-    @Shadow
-    public abstract boolean getIsCritical();
+    @Shadow public double accelerationX;
+    @Shadow public double accelerationY;
+    @Shadow public double accelerationZ;
+    @Shadow public EntityLivingBase shootingEntity;
+    private float motionFactor = 0.95F;
 
     @Override
-    public boolean canPickUp() {
-        return this.canBePickedUp == 1 ? true : false;
+    public int getTicksAlive() {
+        return this.ticksAlive;
     }
 
     @Override
-    public void setCanPickUp(boolean canPickUp) {
-        this.canBePickedUp = canPickUp == true ? 1 : 0;
-    }
-
-    @Override
-    @Shadow
-    public abstract double getDamage();
-
-    @Override
-    @Shadow
-    public abstract void setDamage(double damage);
-
-    @Override
-    public boolean isCritical() {
-        return this.getIsCritical();
-    }
-
-    @Override
-    @Shadow
-    public abstract void setIsCritical(boolean critical);
-
-    @Override
-    public Entity getOwner() {
-        return (Entity) this.shootingEntity;
-    }
-
-    @Override
-    public boolean isInGround() {
-        return this.inGround;
+    public void setTicksAlive(int ticks) {
+        this.ticksAlive = ticks;
     }
 
     @Override
@@ -87,22 +59,53 @@ public abstract class MixinEntityArrow extends MixinEntity implements Arrow {
     }
 
     @Override
-    public int getTicksInGround() {
-        return this.ticksInGround;
+    public void setTicksInAir(int ticks) {
+        this.ticksInAir = ticks;
     }
 
     @Override
-    public int getKnockbackStrength() {
-        return this.knockbackStrength;
+    public double getAccelerationX() {
+        return this.accelerationX;
     }
 
     @Override
-    public void setKnockbackStrenth(int knockback) {
-        this.knockbackStrength = knockback;
+    public void setAccelerationX(double accelX) {
+        this.accelerationX = accelX;
     }
 
     @Override
-    public EntityType getEntityType() {
-        return EntityType.ARROW;
+    public double getAccelerationY() {
+        return this.accelerationY;
+    }
+
+    @Override
+    public void setAccelerationY(double accelY) {
+        this.accelerationY = accelY;
+    }
+
+    @Override
+    public double getAccelerationZ() {
+        return this.accelerationZ;
+    }
+
+    @Override
+    public void setAccelerationZ(double accelZ) {
+        this.accelerationZ = accelZ;
+    }
+
+    @Override
+    @Overwrite
+    public float getMotionFactor() {
+        return this.motionFactor;
+    }
+
+    @Override
+    public void setMotionFactor(float factor) {
+        this.motionFactor = factor;
+    }
+
+    @Override
+    public LivingBase getOwner() {
+        return (LivingBase) this.shootingEntity;
     }
 }

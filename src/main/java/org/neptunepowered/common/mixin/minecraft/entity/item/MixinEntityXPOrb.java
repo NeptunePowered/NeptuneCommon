@@ -21,88 +21,73 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.minecraft.entity.projectile;
+package org.neptunepowered.common.mixin.minecraft.entity.item;
 
-import net.canarymod.api.entity.Arrow;
-import net.canarymod.api.entity.Entity;
 import net.canarymod.api.entity.EntityType;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.canarymod.api.entity.XPOrb;
+import net.canarymod.api.entity.living.humanoid.Player;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
 import org.neptunepowered.common.mixin.minecraft.entity.MixinEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(EntityArrow.class)
-public abstract class MixinEntityArrow extends MixinEntity implements Arrow {
+@Mixin(EntityXPOrb.class)
+public abstract class MixinEntityXPOrb extends MixinEntity implements XPOrb {
 
-    @Shadow public net.minecraft.entity.Entity shootingEntity;
-    @Shadow public int canBePickedUp;
-    @Shadow private boolean inGround;
-    @Shadow private int knockbackStrength;
-    @Shadow private int ticksInGround;
-    @Shadow private int ticksInAir;
-
-    @Shadow
-    public abstract boolean getIsCritical();
+    @Shadow public int xpOrbAge;
+    @Shadow public int delayBeforeCanPickup;
+    @Shadow private int xpOrbHealth;
+    @Shadow private int xpValue;
+    @Shadow private EntityPlayer closestPlayer;
 
     @Override
-    public boolean canPickUp() {
-        return this.canBePickedUp == 1 ? true : false;
+    public short getOrbAge() {
+        return (short) this.xpOrbAge;
     }
 
     @Override
-    public void setCanPickUp(boolean canPickUp) {
-        this.canBePickedUp = canPickUp == true ? 1 : 0;
+    public void setOrbAge(short age) {
+        this.xpOrbAge = age;
     }
 
     @Override
-    @Shadow
-    public abstract double getDamage();
-
-    @Override
-    @Shadow
-    public abstract void setDamage(double damage);
-
-    @Override
-    public boolean isCritical() {
-        return this.getIsCritical();
+    public int getPickUpDelay() {
+        return this.delayBeforeCanPickup;
     }
 
     @Override
-    @Shadow
-    public abstract void setIsCritical(boolean critical);
-
-    @Override
-    public Entity getOwner() {
-        return (Entity) this.shootingEntity;
+    public void setPickUpDelay(int delay) {
+        this.delayBeforeCanPickup = delay;
     }
 
     @Override
-    public boolean isInGround() {
-        return this.inGround;
+    public short getHealth() {
+        return (short) this.xpOrbHealth;
     }
 
     @Override
-    public int getTicksInAir() {
-        return this.ticksInAir;
+    public void setHealth(short health) {
+        this.xpOrbHealth = health;
     }
 
     @Override
-    public int getTicksInGround() {
-        return this.ticksInGround;
+    public short getXPValue() {
+        return (short) this.xpValue;
     }
 
     @Override
-    public int getKnockbackStrength() {
-        return this.knockbackStrength;
+    public void setXPValue(short value) {
+        this.xpValue = value;
     }
 
     @Override
-    public void setKnockbackStrenth(int knockback) {
-        this.knockbackStrength = knockback;
+    public Player getClosestPlayer() {
+        return (Player) this.closestPlayer;
     }
 
     @Override
     public EntityType getEntityType() {
-        return EntityType.ARROW;
+        return EntityType.XPORB;
     }
 }

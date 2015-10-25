@@ -25,40 +25,35 @@ package org.neptunepowered.common.mixin.minecraft.entity.projectile;
 
 import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.entity.throwable.EntityThrowable;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
+import org.neptunepowered.common.mixin.minecraft.entity.MixinEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(net.minecraft.entity.projectile.EntityThrowable.class)
-@Implements(@Interface(iface = EntityThrowable.class, prefix = "throw$"))
-public abstract class MixinEntityThrowable extends Entity {
+public abstract class MixinEntityThrowable extends MixinEntity implements EntityThrowable {
 
     protected float gravity = 0.3f;
     @Shadow private EntityLivingBase thrower;
 
-    public MixinEntityThrowable(World worldIn) {
-        super(worldIn);
-    }
-
     @Overwrite
     protected float getGravityVelocity() {
-        return gravity;
+        return this.gravity;
     }
 
-    public LivingBase throw$getThrower() {
-        return (LivingBase) thrower;
+    @Override
+    public LivingBase getThrower() {
+        return (LivingBase) this.thrower;
     }
 
-    public float throw$getGravity() {
+    @Override
+    public float getGravity() {
         return getGravityVelocity();
     }
 
-    public void throw$setGravity(float velocity) {
-        gravity = velocity;
+    @Override
+    public void setGravity(float velocity) {
+        this.gravity = velocity;
     }
 }
