@@ -45,12 +45,15 @@ import net.canarymod.exceptions.InvalidInstanceException;
 import net.canarymod.logger.Logman;
 import net.canarymod.tasks.ServerTask;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.network.ServerStatusResponse;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.awt.GraphicsEnvironment;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,6 +64,7 @@ public abstract class MixinMinecraftServer implements Server {
     @Shadow private int tickCounter;
     @Shadow private boolean serverRunning;
     @Shadow private ServerConfigurationManager serverConfigManager;
+    @Shadow private ServerStatusResponse statusResponse;
 
     @Shadow
     public abstract void initiateShutdown();
@@ -70,7 +74,10 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public String getHostname() {
-        return null;
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {}
+        return "local.host";
     }
 
     @Override
@@ -281,7 +288,7 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public int getProtocolVersion() {
-        return 0;
+        return this.statusResponse.getProtocolVersionInfo().getProtocol();
     }
 
     @Override
