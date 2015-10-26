@@ -57,7 +57,7 @@ public class NeptuneCommand extends CanaryCommand {
     @Override
     protected void execute(MessageReceiver caller, String[] parameters) {
         try {
-            command.processCommand(new MinecraftCommandSender(caller), parameters);
+            this.command.processCommand((ICommandSender) caller, parameters);
         } catch (CommandException e) {
             Canary.log.error("Eh, something has broken :(", e);
         }
