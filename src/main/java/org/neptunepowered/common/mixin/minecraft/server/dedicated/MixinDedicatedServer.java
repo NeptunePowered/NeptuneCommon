@@ -43,9 +43,9 @@ public abstract class MixinDedicatedServer extends MinecraftServer {
         super(proxy, workDir);
     }
 
-    @Inject(method = "startServer()Z", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/server/MinecraftServer;loadAllWorlds(Ljava/lang/String;Ljava/lang/String;"
-                    + "JLnet/minecraft/world/WorldType;Ljava/lang/String;)V"))
+    @Inject(method = "startServer", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/server/dedicated/DedicatedServer;loadAllWorlds(Ljava/lang/String;"
+                    + "Ljava/lang/String;JLnet/minecraft/world/WorldType;Ljava/lang/String;)V"))
     public void onStartServer(CallbackInfoReturnable<Boolean> ci) throws IOException {
         Canary.enableEarlyPlugins();
         ((Neptune) Canary.instance()).lateInitialisation();

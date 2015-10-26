@@ -33,7 +33,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.util.BlockPos;
 import org.neptunepowered.common.Neptune;
-import org.neptunepowered.common.interfaces.canary.commandsys.IMixinCommandManager;
 import org.neptunepowered.common.interfaces.minecraft.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.commandsys.NeptuneCommand;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,7 +48,7 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
 
     @Override
     public Map getCommands() {
-        return ((IMixinCommandManager) Canary.commands()).getCommands();
+        return Canary.commands().getCommands();
     }
 
     @Override
