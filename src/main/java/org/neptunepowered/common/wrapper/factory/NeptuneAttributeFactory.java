@@ -23,28 +23,30 @@
  */
 package org.neptunepowered.common.wrapper.factory;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.Maps;
 import net.canarymod.api.attributes.Attribute;
 import net.canarymod.api.factory.AttributeFactory;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
 
+import java.util.Map;
+
 public class NeptuneAttributeFactory implements AttributeFactory {
 
-    private static BiMap<String, IAttribute> map =
-            ImmutableBiMap.<String, IAttribute>builder()
-                    .put(SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName(),
-                            SharedMonsterAttributes.maxHealth)
-                    .put(SharedMonsterAttributes.followRange.getAttributeUnlocalizedName(),
-                            SharedMonsterAttributes.followRange)
-                    .put(SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName(),
-                            SharedMonsterAttributes.knockbackResistance)
-                    .put(SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
-                            SharedMonsterAttributes.movementSpeed)
-                    .put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-                            SharedMonsterAttributes.attackDamage)
-                    .build();
+    private static Map<String, IAttribute> map = Maps.newHashMap();
+
+    public NeptuneAttributeFactory() {
+        map.put(SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName(),
+                SharedMonsterAttributes.maxHealth);
+        map.put(SharedMonsterAttributes.followRange.getAttributeUnlocalizedName(),
+                SharedMonsterAttributes.followRange);
+        map.put(SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName(),
+                SharedMonsterAttributes.knockbackResistance);
+        map.put(SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
+                SharedMonsterAttributes.movementSpeed);
+        map.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+                SharedMonsterAttributes.attackDamage);
+    }
 
     @Override
     public Attribute getGenericAttribute(String nativeName) {
