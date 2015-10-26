@@ -41,6 +41,12 @@ public abstract class MixinBlock implements BlockBase {
 
     @Shadow protected Material blockMaterial;
     @Shadow protected boolean needsRandomTick;
+    @Shadow protected double minX;
+    @Shadow protected double minY;
+    @Shadow protected double minZ;
+    @Shadow protected double maxX;
+    @Shadow protected double maxY;
+    @Shadow protected double maxZ;
 
     @Override
     @Shadow
@@ -145,32 +151,32 @@ public abstract class MixinBlock implements BlockBase {
 
     @Override
     public double getBlockBoundsMinX() {
-        return 0;
+        return this.minX;
     }
 
     @Override
     public double getBlockBoundsMaxX() {
-        return 0;
+        return this.maxX;
     }
 
     @Override
     public double getBlockBoundsMinY() {
-        return 0;
+        return this.minY;
     }
 
     @Override
     public double getBlockBoundsMaxY() {
-        return 0;
+        return this.maxY;
     }
 
     @Override
     public double getBlockBoundsMinZ() {
-        return 0;
+        return this.minZ;
     }
 
     @Override
     public double getBlockBoundsMaxZ() {
-        return 0;
+        return this.maxZ;
     }
 
     @Override
