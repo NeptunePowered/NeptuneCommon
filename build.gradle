@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile project('CanaryLib')
+    compile 'net.canarymod:CanaryLib:1.2.1-SNAPSHOT'
     compile('org.spongepowered:mixin:0.4.4') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
