@@ -35,6 +35,22 @@ public class MixinCanary {
 
     @Shadow private static String jarPath;
 
+    /*
+    This is a temporary way to get the implementation title.
+     */
+    @Overwrite
+    public static String getImplementationTitle() {
+        return "NeptuneVanilla";
+    }
+
+    /*
+    This is a temporary way to get the implementation version.
+     */
+    @Overwrite
+    public static String getImplementationVersion() {
+        return "1.8-1.2.1-SNAPSHOT";
+    }
+
     @Overwrite
     public static String getCanaryJarPath() {
         if (jarPath == null) {
