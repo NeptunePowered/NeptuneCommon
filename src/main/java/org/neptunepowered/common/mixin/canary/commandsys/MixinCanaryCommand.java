@@ -39,18 +39,18 @@ import java.util.List;
 @Mixin(CanaryCommand.class)
 public abstract class MixinCanaryCommand implements ICommand {
 
-    @Shadow public Command meta;
+    @Shadow(remap = false) public Command meta;
 
-    @Shadow
+    @Shadow(remap = false)
     protected abstract boolean parseCommand(MessageReceiver caller, String[] parameters);
 
-    @Shadow
+    @Shadow(remap = false)
     public abstract boolean canUse(MessageReceiver msgrec);
 
-    @Shadow
+    @Shadow(remap = false)
     protected abstract List<String> tabComplete(MessageReceiver msgrec, String[] args);
 
-    @Shadow
+    @Shadow(remap = false)
     public abstract String getLocaleDescription();
 
     @Override

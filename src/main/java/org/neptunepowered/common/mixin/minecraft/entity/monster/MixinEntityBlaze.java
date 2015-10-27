@@ -21,41 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.mixin.canary;
+package org.neptunepowered.common.mixin.minecraft.entity.monster;
 
-import net.canarymod.Canary;
-import net.visualillusionsent.utils.JarUtils;
-import org.spongepowered.asm.launch.MixinTweaker;
+import net.canarymod.api.entity.EntityType;
+import net.canarymod.api.entity.living.monster.Blaze;
+import net.minecraft.entity.monster.EntityBlaze;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(Canary.class)
-public class MixinCanary {
+@Mixin(EntityBlaze.class)
+public abstract class MixinEntityBlaze extends MixinEntityMob implements Blaze {
 
-    @Shadow(remap = false) private static String jarPath;
+    @Shadow
+    public abstract void setOnFire(boolean onFire);
 
-    /*
-    This is a temporary way to get the implementation title.
-     */
-    @Overwrite
-    public static String getImplementationTitle() {
-        return "NeptuneVanilla";
+    @Override
+    @Shadow
+    public abstract boolean isBurning();
+
+    @Override
+    public void setBurning(boolean isBurning) {
+        this.setOnFire(isBurning);
     }
 
-    /*
-    This is a temporary way to get the implementation version.
-     */
-    @Overwrite
-    public static String getImplementationVersion() {
-        return "1.8-1.2.1-SNAPSHOT";
-    }
-
-    @Overwrite
-    public static String getCanaryJarPath() {
-        if (jarPath == null) {
-            jarPath = JarUtils.getJarPath(MixinTweaker.class);
-        }
-        return jarPath;
+    @Override
+    public EntityType getEntityType() {
+        return null;
     }
 }
