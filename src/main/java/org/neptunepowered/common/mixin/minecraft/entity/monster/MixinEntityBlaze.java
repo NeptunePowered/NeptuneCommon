@@ -46,6 +46,6 @@ public abstract class MixinEntityBlaze extends MixinEntityMob implements Blaze {
 
     @Override
     public EntityType getEntityType() {
-        return null;
+        return EntityType.BLAZE;
     }
 }

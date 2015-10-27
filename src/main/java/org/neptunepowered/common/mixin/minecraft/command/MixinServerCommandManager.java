@@ -32,6 +32,8 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
 import org.neptunepowered.common.Neptune;
 import org.neptunepowered.common.interfaces.minecraft.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.commandsys.NeptuneCommand;
@@ -60,7 +62,15 @@ public class MixinServerCommandManager extends CommandHandler implements IMixinS
         String[] args = command.split(" ");
         String commandName = args[0];
 
-        return Canary.commands().parseCommand((MessageReceiver) sender, commandName, args) ? 1 : 0;
+        boolean exists = Canary.commands().parseCommand((MessageReceiver) sender, commandName, args);
+
+        if (!exists) {
+            ChatComponentTranslation chatcomponenttranslation = new ChatComponentTranslation("commands.generic.notFound", new Object[0]);
+            chatcomponenttranslation.getChatStyle().setColor(EnumChatFormatting.RED);
+            sender.addChatMessage(chatcomponenttranslation);
+        }
+
+        return exists ? 1 : 0;
     }
 
     @Override
