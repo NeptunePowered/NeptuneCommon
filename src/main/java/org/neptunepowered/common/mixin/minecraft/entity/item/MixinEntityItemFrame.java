@@ -76,6 +76,11 @@ public abstract class MixinEntityItemFrame extends MixinEntityHanging implements
     }
 
     @Override
+    public String getFqName() {
+        return "ItemFrame";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.ITEMFRAME;
     }

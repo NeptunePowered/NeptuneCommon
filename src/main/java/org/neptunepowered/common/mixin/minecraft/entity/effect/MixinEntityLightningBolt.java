@@ -56,6 +56,11 @@ public abstract class MixinEntityLightningBolt extends MixinEntityWeatherEffect 
     }
 
     @Override
+    public String getFqName() {
+        return "LightningBolt";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.LIGHTNINGBOLT;
     }

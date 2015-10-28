@@ -67,6 +67,11 @@ public abstract class MixinEntityPainting extends MixinEntityHanging implements 
     }
 
     @Override
+    public String getFqName() {
+        return "Painting";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.PAINTING;
     }

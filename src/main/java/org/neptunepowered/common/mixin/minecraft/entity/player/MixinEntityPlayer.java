@@ -29,6 +29,7 @@ import net.canarymod.api.entity.living.humanoid.HumanCapabilities;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.PlayerInventory;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.util.IChatComponent;
 import org.neptunepowered.common.mixin.minecraft.entity.MixinEntityLivingBase;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,6 +37,8 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntityPlayer.class)
 public abstract class MixinEntityPlayer extends MixinEntityLivingBase implements Human {
+
+    @Shadow public PlayerCapabilities capabilities;
 
     @Shadow
     public abstract IChatComponent shadow$getDisplayName();
@@ -102,7 +105,7 @@ public abstract class MixinEntityPlayer extends MixinEntityLivingBase implements
 
     @Override
     public HumanCapabilities getCapabilities() {
-        return null;
+        return (HumanCapabilities) this.capabilities;
     }
 
     @Override

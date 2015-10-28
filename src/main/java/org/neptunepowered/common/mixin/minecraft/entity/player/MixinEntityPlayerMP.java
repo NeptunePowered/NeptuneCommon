@@ -272,11 +272,6 @@ public abstract class MixinEntityPlayerMP extends MixinEntityPlayer implements P
     }
 
     @Override
-    public EntityType getEntityType() {
-        return EntityType.PLAYER;
-    }
-
-    @Override
     public PermissionProvider getPermissionProvider() {
         return null;
     }
@@ -584,5 +579,15 @@ public abstract class MixinEntityPlayerMP extends MixinEntityPlayer implements P
     @Override
     public Inventory getEnderChestInventory() {
         return null;
+    }
+
+    @Override
+    public String getFqName() {
+        return "Player";
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.PLAYER;
     }
 }
