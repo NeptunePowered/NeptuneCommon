@@ -26,11 +26,12 @@ package org.neptunepowered.common.mixin.minecraft.entity.monster;
 import net.canarymod.api.entity.EntityType;
 import net.canarymod.api.entity.living.monster.Slime;
 import net.minecraft.entity.monster.EntitySlime;
+import org.neptunepowered.common.mixin.minecraft.entity.MixinEntityLiving;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntitySlime.class)
-public abstract class MixinEntitySlime extends MixinEntityMob implements Slime {
+public abstract class MixinEntitySlime extends MixinEntityLiving implements Slime {
 
     @Shadow
     public abstract int getSlimeSize();
