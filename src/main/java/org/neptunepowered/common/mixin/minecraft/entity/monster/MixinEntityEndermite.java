@@ -40,6 +40,11 @@ public abstract class MixinEntityEndermite extends MixinEntityMob implements End
     }
 
     @Override
+    public String getFqName() {
+        return "Endermite";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.ENDERMITE;
     }

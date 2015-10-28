@@ -24,37 +24,33 @@
 package org.neptunepowered.common.mixin.minecraft.entity.monster;
 
 import net.canarymod.api.entity.EntityType;
-import net.canarymod.api.entity.living.monster.Skeleton;
-import net.minecraft.entity.monster.EntitySkeleton;
+import net.canarymod.api.entity.living.monster.Witch;
+import net.minecraft.entity.monster.EntityWitch;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(EntitySkeleton.class)
-public abstract class MixinEntitySkeleton extends MixinEntityMob implements Skeleton {
+@Mixin(EntityWitch.class)
+public abstract class MixinEntityWitch extends MixinEntityMob implements Witch {
 
     @Shadow
-    public abstract int getSkeletonType();
-
-    @Shadow
-    public abstract void setSkeletonType(int p_82201_1_);
+    public abstract boolean getAggressive();
 
     @Override
-    public boolean isWitherSkeleton() {
-        return this.getSkeletonType() == 1;
+    public boolean isAgressive() {
+        return this.getAggressive();
     }
 
     @Override
-    public void setIsWitherSkeleton(boolean wither) {
-        this.setSkeletonType(wither ? 1 : 0);
-    }
+    @Shadow
+    public abstract void setAggressive(boolean aggressive);
 
     @Override
     public String getFqName() {
-        return "Skeleton";
+        return "Witch";
     }
 
     @Override
     public EntityType getEntityType() {
-        return this.isWitherSkeleton() ? EntityType.WITHERSKELETON : EntityType.SKELETON;
+        return EntityType.WITCH;
     }
 }

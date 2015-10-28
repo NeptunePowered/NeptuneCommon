@@ -108,4 +108,9 @@ public abstract class MixinEntityFireball extends MixinEntity implements Firebal
     public LivingBase getOwner() {
         return (LivingBase) this.shootingEntity;
     }
+
+    @Override
+    public String getFqName() {
+        return "Fireball";
+    }
 }

@@ -320,11 +320,6 @@ public abstract class MixinEntity implements Entity {
     }
 
     @Override
-    public String getFqName() {
-        return null;
-    }
-
-    @Override
     public boolean canSpawn() {
         return !preventEntitySpawning;
     }

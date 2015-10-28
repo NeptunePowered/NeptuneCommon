@@ -32,6 +32,11 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class MixinEntityMagmaCube extends MixinEntitySlime implements MagmaCube {
 
     @Override
+    public String getFqName() {
+        return "MagmaCube";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.MAGMACUBE;
     }

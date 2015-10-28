@@ -102,6 +102,11 @@ public abstract class MixinEntityArrow extends MixinEntity implements Arrow {
     }
 
     @Override
+    public String getFqName() {
+        return "Arrow";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.ARROW;
     }

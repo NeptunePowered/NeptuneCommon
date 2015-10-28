@@ -37,6 +37,11 @@ public abstract class MixinEntityGuardian extends MixinEntityMob implements Guar
     public abstract boolean isElder();
 
     @Override
+    public String getFqName() {
+        return "Guardian";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.GUARDIAN;
     }

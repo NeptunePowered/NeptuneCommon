@@ -45,6 +45,11 @@ public abstract class MixinEntityBlaze extends MixinEntityMob implements Blaze {
     }
 
     @Override
+    public String getFqName() {
+        return "Blaze";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.BLAZE;
     }

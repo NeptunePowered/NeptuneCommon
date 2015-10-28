@@ -49,6 +49,11 @@ public abstract class MixinEntitySlime extends MixinEntityMob implements Slime {
     }
 
     @Override
+    public String getFqName() {
+        return "Slime";
+    }
+
+    @Override
     public EntityType getEntityType() {
         return EntityType.SLIME;
     }
