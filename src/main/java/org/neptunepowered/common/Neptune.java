@@ -24,6 +24,7 @@
 package org.neptunepowered.common;
 
 import net.canarymod.Canary;
+import net.canarymod.bansystem.BanManager;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.commandsys.CommandList;
 import net.canarymod.commandsys.CommandManager;
@@ -36,9 +37,11 @@ import net.canarymod.motd.CanaryMessageOfTheDayListener;
 import net.canarymod.motd.MessageOfTheDay;
 import net.canarymod.plugin.DefaultPluginManager;
 import net.canarymod.plugin.PluginLangLoader;
+import net.canarymod.user.WhitelistProvider;
 import net.minecraft.server.MinecraftServer;
 import org.neptunepowered.common.interfaces.minecraft.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.NeptuneTranslator;
+import org.neptunepowered.common.wrapper.commandsys.NeptunePlayerSelector;
 import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
 
@@ -65,7 +68,10 @@ public class Neptune extends Canary {
         this.commandManager = new CommandManager(); // Manage all the commands :D
         this.hookExecutor = new HookExecutor(); // Execute the hooks
         this.helpManager = new HelpManager(); // /help
+        this.banManager = new BanManager(); // bans
+        this.whitelist = new WhitelistProvider(); // whitelist
         this.factory = new NeptuneFactory(); // Factories
+        this.playerSelector = new NeptunePlayerSelector(); // player selector
         this.pluginManager = new DefaultPluginManager();
 
         pluginManager.scanForPlugins(); // Scan for plugins
