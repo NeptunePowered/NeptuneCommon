@@ -36,14 +36,6 @@ public class MixinCanary {
     @Shadow(remap = false) private static String jarPath;
 
     /*
-    This is a temporary way to get the implementation title.
-     */
-    @Overwrite
-    public static String getImplementationTitle() {
-        return "NeptuneVanilla";
-    }
-
-    /*
     This is a temporary way to get the implementation version.
      */
     @Overwrite
