@@ -21,17 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common.util;
+package org.neptunepowered.common.wrapper.world.blocks.properties;
 
-public class Wrapper<T> {
+import net.canarymod.api.world.blocks.properties.BlockEnumProperty;
+import net.minecraft.block.properties.PropertyEnum;
 
-    private final T handle;
+public class NeptuneBlockEnumProperty extends NeptuneBlockProperty implements BlockEnumProperty {
 
-    public Wrapper(final T handle) {
-        this.handle = handle;
+    public NeptuneBlockEnumProperty(PropertyEnum handle) {
+        super(handle);
     }
 
-    public T getHandle() {
-        return handle;
+    @Override
+    public PropertyEnum getHandle() {
+        return (PropertyEnum) super.getHandle();
     }
 }
