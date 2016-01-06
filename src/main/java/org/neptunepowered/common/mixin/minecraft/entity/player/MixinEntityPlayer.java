@@ -26,14 +26,20 @@ package org.neptunepowered.common.mixin.minecraft.entity.player;
 import net.canarymod.api.entity.EntityItem;
 import net.canarymod.api.entity.living.humanoid.Human;
 import net.canarymod.api.entity.living.humanoid.HumanCapabilities;
+import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.PlayerInventory;
+import net.canarymod.hook.player.BedEnterHook;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.PlayerCapabilities;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IChatComponent;
 import org.neptunepowered.common.mixin.minecraft.entity.MixinEntityLivingBase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EntityPlayer.class)
 public abstract class MixinEntityPlayer extends MixinEntityLivingBase implements Human {
@@ -42,6 +48,18 @@ public abstract class MixinEntityPlayer extends MixinEntityLivingBase implements
 
     @Shadow
     public abstract IChatComponent shadow$getDisplayName();
+
+    @Inject(method = "trySleep", at = @At(value = "INVOKE"))
+    public void onTrySleep(BlockPos bedLocation, CallbackInfoReturnable<EntityPlayer.EnumStatus> callbackInfo) {
+        if (this instanceof Player) {
+            BedEnterHook bedEnterHook = (BedEnterHook)
+                    new BedEnterHook((Player) this, this.getWorld().getBlockAt(bedLocation.getX(),
+                            bedLocation.getY(), bedLocation.getZ())).call();
+            if (bedEnterHook.isCanceled()) {
+                callbackInfo.setReturnValue(EntityPlayer.EnumStatus.OTHER_PROBLEM);
+            }
+        }
+    }
 
     @Override
     public String getDisplayName() {
