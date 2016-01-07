@@ -72,13 +72,12 @@ public abstract class MixinMinecraftServer implements Server {
     @Shadow
     public abstract String getMinecraftVersion();
 
+    @Shadow
+    public abstract String[] getAllUsernames();
+
     @Override
-    public String getHostname() {
-        try {
-            return InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {}
-        return "local.host";
-    }
+    @Shadow
+    public abstract String getHostname();
 
     @Override
     public int getNumPlayersOnline() {
@@ -86,9 +85,8 @@ public abstract class MixinMinecraftServer implements Server {
     }
 
     @Override
-    public int getMaxPlayers() {
-        return serverConfigManager.getMaxPlayers();
-    }
+    @Shadow
+    public abstract int getMaxPlayers();
 
     @Override
     public String[] getPlayerNameList() {
@@ -97,7 +95,7 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public String[] getKnownPlayerNames() {
-        return new String[0];
+        return this.getAllUsernames();
     }
 
     @Override

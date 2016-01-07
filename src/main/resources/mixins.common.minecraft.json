@@ -6,6 +6,7 @@
         "block.MixinBlock",
         "command.MixinCommandSender",
         "command.MixinServerCommandManager",
+        "crash.MixinCrashReport",
         "entity.ai.attributes.MixinAttributeModifier",
         "entity.ai.attributes.MixinBaseAttribute",
         "entity.ai.attributes.MixinBaseAttributeMap",

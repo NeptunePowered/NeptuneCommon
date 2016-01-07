@@ -41,6 +41,7 @@ import net.canarymod.user.WhitelistProvider;
 import net.minecraft.server.MinecraftServer;
 import org.neptunepowered.common.interfaces.minecraft.command.IMixinServerCommandManager;
 import org.neptunepowered.common.wrapper.NeptuneTranslator;
+import org.neptunepowered.common.wrapper.commandsys.NeptuneCommand;
 import org.neptunepowered.common.wrapper.commandsys.NeptunePlayerSelector;
 import org.neptunepowered.common.wrapper.factory.NeptuneFactory;
 import org.neptunepowered.common.wrapper.util.NeptuneJsonNBTUtility;
@@ -81,6 +82,13 @@ public class Neptune extends Canary {
         ((IMixinServerCommandManager) ((MinecraftServer) server).getCommandManager()).registerEarlyCommands();
         try {
             this.commandManager.registerCommands(new CommandList(), getServer(), true);
+        } catch (CommandDependencyException e) {
+            log.error("Failed to set up system commands! Dependency resolution failed!", e);
+        } catch (DuplicateCommandException f) {
+            log.error("Failed to set up system commands! The command already exists!", f);
+        }
+        try {
+            this.commandManager.registerCommands(new NeptuneCommands(), getServer(), true);
         } catch (CommandDependencyException e) {
             log.error("Failed to set up system commands! Dependency resolution failed!", e);
         } catch (DuplicateCommandException f) {
