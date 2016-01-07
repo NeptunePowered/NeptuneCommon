@@ -94,6 +94,6 @@ public abstract class MixinScore implements net.canarymod.api.scoreboard.Score {
 
     @Override
     public void update() {
-
+        // Not all that sure about this method, as I'm not sure this type of functionality exists
     }
 }

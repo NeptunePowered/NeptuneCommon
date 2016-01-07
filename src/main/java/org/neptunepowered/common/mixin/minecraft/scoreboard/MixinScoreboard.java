@@ -23,6 +23,7 @@
  */
 package org.neptunepowered.common.mixin.minecraft.scoreboard;
 
+import com.google.common.collect.Lists;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.api.scoreboard.Score;
 import net.canarymod.api.scoreboard.ScoreObjective;
@@ -30,13 +31,25 @@ import net.canarymod.api.scoreboard.ScoreObjectiveCriteria;
 import net.canarymod.api.scoreboard.ScorePosition;
 import net.canarymod.api.scoreboard.Team;
 import net.canarymod.api.world.World;
+import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.scoreboard.Scoreboard;
+import org.neptunepowered.common.wrapper.scoreboard.NeptuneScoreObjectiveCriteria;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
+import java.util.Map;
 
 @Mixin(Scoreboard.class)
-public class MixinScoreboard implements net.canarymod.api.scoreboard.Scoreboard {
+public abstract class MixinScoreboard implements net.canarymod.api.scoreboard.Scoreboard {
+
+    @Shadow private Map teams;
+
+    @Shadow
+    public abstract net.minecraft.scoreboard.ScoreObjective addScoreObjective(String name, IScoreObjectiveCriteria criteria);
+
+    @Shadow
+    public abstract net.minecraft.scoreboard.ScoreObjective getObjective(String name);
 
     @Override
     public List<ScoreObjective> getScoreObjectives() {
@@ -50,7 +63,7 @@ public class MixinScoreboard implements net.canarymod.api.scoreboard.Scoreboard 
 
     @Override
     public ScoreObjective addScoreObjective(String name, ScoreObjectiveCriteria criteria) {
-        return null;
+        return (ScoreObjective) this.addScoreObjective(name, ((NeptuneScoreObjectiveCriteria) criteria).getHandle());
     }
 
     @Override
@@ -65,12 +78,12 @@ public class MixinScoreboard implements net.canarymod.api.scoreboard.Scoreboard 
 
     @Override
     public ScoreObjective getScoreObjective(String name) {
-        return null;
+        return (ScoreObjective) this.getObjective(name);
     }
 
     @Override
     public List<Team> getTeams() {
-        return null;
+        return Lists.newArrayList(this.teams.values());
     }
 
     @Override
