@@ -26,7 +26,6 @@ package org.neptunepowered.common.wrapper.inventory.recipes;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.recipes.ShapedRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
-import org.neptunepowered.common.interfaces.minecraft.item.crafting.IMixinShapedRecipes;
 
 public class NeptuneShapedRecipe extends NeptuneRecipe implements ShapedRecipe {
 
@@ -36,17 +35,17 @@ public class NeptuneShapedRecipe extends NeptuneRecipe implements ShapedRecipe {
 
     @Override
     public int getWidth() {
-        return ((IMixinShapedRecipes) this.getHandle()).getRecipeWidth();
+        return this.getHandle().recipeWidth;
     }
 
     @Override
     public int getHeight() {
-        return ((IMixinShapedRecipes) this.getHandle()).getRecipeHeight();
+        return this.getHandle().recipeHeight;
     }
 
     @Override
     public Item[] getRecipeItems() {
-        return (Item[]) ((IMixinShapedRecipes) this.getHandle()).getRecipeItems();
+        return (Item[]) this.getHandle().recipeItems;
     }
 
     @Override

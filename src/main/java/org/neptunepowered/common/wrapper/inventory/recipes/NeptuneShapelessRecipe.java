@@ -26,7 +26,6 @@ package org.neptunepowered.common.wrapper.inventory.recipes;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.recipes.ShapelessRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
-import org.neptunepowered.common.interfaces.minecraft.item.crafting.IMixinShapelessRecipes;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class NeptuneShapelessRecipe extends NeptuneRecipe implements ShapelessRe
 
     @Override
     public List<Item> getRecipeItems() {
-        return ((IMixinShapelessRecipes) this.getHandle()).getRecipeItems();
+        return this.getHandle().recipeItems;
     }
 
     @Override
