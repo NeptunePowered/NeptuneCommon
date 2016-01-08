@@ -23,6 +23,7 @@
  */
 package org.neptunepowered.common;
 
+import net.canarymod.Canary;
 import net.canarymod.chat.ChatFormat;
 import net.canarymod.chat.MessageReceiver;
 import net.canarymod.commandsys.Command;
@@ -47,7 +48,10 @@ public class NeptuneCommands implements CommandListener {
             permissions = { "neptune.command.info" },
             toolTip = "/neptune info")
     public void infoCommand(MessageReceiver caller, String[] args) {
-        caller.message(ChatFormat.BLUE + "" + ChatFormat.BOLD  + "=== Neptune ===");
+        caller.message(String.format("%s%s=== %s %s ===",
+                ChatFormat.BOLD, ChatFormat.BLUE, Canary.getImplementationTitle(), Canary.getImplementationVersion()));
+        caller.message("Website: https://www.neptunepowered.org/");
+        caller.message("Lead Developer: Jamie Mansfield");
     }
 
     @Command(aliases = { "crash" },

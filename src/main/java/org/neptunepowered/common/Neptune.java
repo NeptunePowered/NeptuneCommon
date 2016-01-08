@@ -37,6 +37,7 @@ import net.canarymod.motd.CanaryMessageOfTheDayListener;
 import net.canarymod.motd.MessageOfTheDay;
 import net.canarymod.plugin.DefaultPluginManager;
 import net.canarymod.plugin.PluginLangLoader;
+import net.canarymod.user.OperatorsProvider;
 import net.canarymod.user.WhitelistProvider;
 import net.minecraft.server.MinecraftServer;
 import org.neptunepowered.common.interfaces.minecraft.command.IMixinServerCommandManager;
@@ -71,6 +72,7 @@ public class Neptune extends Canary {
         this.helpManager = new HelpManager(); // /help
         this.banManager = new BanManager(); // bans
         this.whitelist = new WhitelistProvider(); // whitelist
+        this.ops = new OperatorsProvider(); // op
         this.factory = new NeptuneFactory(); // Factories
         this.playerSelector = new NeptunePlayerSelector(); // player selector
         this.pluginManager = new DefaultPluginManager();
