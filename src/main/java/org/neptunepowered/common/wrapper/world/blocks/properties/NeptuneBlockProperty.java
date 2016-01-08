@@ -25,6 +25,10 @@ package org.neptunepowered.common.wrapper.world.blocks.properties;
 
 import net.canarymod.api.world.blocks.properties.BlockProperty;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.properties.PropertyInteger;
 import org.neptunepowered.common.util.Wrapper;
 
 import java.util.Collection;
@@ -53,5 +57,18 @@ public class NeptuneBlockProperty extends Wrapper<IProperty> implements BlockPro
     @Override
     public boolean canApply(Comparable value) {
         return this.getAllowedValues().contains(value);
+    }
+
+    public static BlockProperty of(IProperty property) {
+        if (property instanceof PropertyBool) {
+            return new NeptuneBlockBooleanProperty((PropertyBool) property);
+        } else if (property instanceof PropertyDirection) {
+            return new NeptuneBlockDirectionProperty((PropertyDirection) property);
+        } else if (property instanceof PropertyEnum) {
+            return new NeptuneBlockEnumProperty((PropertyEnum) property);
+        } else if (property instanceof PropertyInteger) {
+            return new NeptuneBlockIntegerProperty((PropertyInteger) property);
+        }
+        return new NeptuneBlockProperty(property);
     }
 }

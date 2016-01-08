@@ -27,12 +27,13 @@ import net.canarymod.api.GameMode;
 import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.hook.player.GameModeChangeHook;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.S38PacketPlayerListItem;
 import net.minecraft.server.management.ItemInWorldManager;
 import net.minecraft.world.WorldSettings;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemInWorldManager.class)
 public class MixinItemInWorldManager {
@@ -40,23 +41,14 @@ public class MixinItemInWorldManager {
     @Shadow public EntityPlayerMP thisPlayerMP;
     @Shadow private WorldSettings.GameType gameType;
 
-    @Overwrite
-    public void setGameType(WorldSettings.GameType type) {
-        // Neptune: Start
+    @Inject(method = "setGameType", at = @At("HEAD"))
+    public void onSetGameType(WorldSettings.GameType type, CallbackInfo ci) {
         GameModeChangeHook gameModeChangeHook =
                 (GameModeChangeHook) new GameModeChangeHook((Player) this.thisPlayerMP,
                         GameMode.fromId(type.getID())).call();
 
         if (gameModeChangeHook.isCanceled()) {
-            return;
+            ci.cancel();
         }
-        // Neptune: End
-
-        this.gameType = type;
-        type.configurePlayerCapabilities(this.thisPlayerMP.capabilities);
-        this.thisPlayerMP.sendPlayerAbilities();
-        this.thisPlayerMP.mcServer.getConfigurationManager().sendPacketToAllPlayers(
-                new S38PacketPlayerListItem(S38PacketPlayerListItem.Action.UPDATE_GAME_MODE,
-                        new EntityPlayerMP[]{this.thisPlayerMP}));
     }
 }

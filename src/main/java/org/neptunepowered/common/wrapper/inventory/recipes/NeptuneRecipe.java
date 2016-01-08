@@ -27,6 +27,8 @@ import net.canarymod.api.inventory.CraftingMatrix;
 import net.canarymod.api.inventory.Item;
 import net.canarymod.api.inventory.recipes.Recipe;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import org.neptunepowered.common.util.Wrapper;
 
 public abstract class NeptuneRecipe extends Wrapper<IRecipe> implements Recipe {
@@ -48,5 +50,24 @@ public abstract class NeptuneRecipe extends Wrapper<IRecipe> implements Recipe {
     @Override
     public boolean matchesMatrix(CraftingMatrix matrix) {
         return false;
+    }
+
+    public static NeptuneRecipe of(IRecipe recipe) {
+        if (recipe instanceof ShapedRecipes) {
+            return new NeptuneShapedRecipe((ShapedRecipes) recipe);
+        } else if(recipe instanceof ShapelessRecipes) {
+            return new NeptuneShapelessRecipe((ShapelessRecipes) recipe);
+        }
+        return new NeptuneRecipe(recipe) {
+            @Override
+            public boolean isShapeless() {
+                return false;
+            }
+
+            @Override
+            public boolean isShaped() {
+                return false;
+            }
+        };
     }
 }
