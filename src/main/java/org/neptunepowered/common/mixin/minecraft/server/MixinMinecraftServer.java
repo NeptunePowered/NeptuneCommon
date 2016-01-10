@@ -25,6 +25,7 @@ package org.neptunepowered.common.mixin.minecraft.server;
 
 import static net.canarymod.Canary.log;
 
+import com.google.common.collect.Lists;
 import net.canarymod.api.CommandBlockLogic;
 import net.canarymod.api.ConfigurationManager;
 import net.canarymod.api.OfflinePlayer;
@@ -44,10 +45,13 @@ import net.canarymod.chat.ReceiverType;
 import net.canarymod.exceptions.InvalidInstanceException;
 import net.canarymod.logger.Logman;
 import net.canarymod.tasks.ServerTask;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.network.ServerStatusResponse;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
+import org.neptunepowered.common.wrapper.inventory.recipes.NeptuneRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -240,7 +244,13 @@ public abstract class MixinMinecraftServer implements Server {
 
     @Override
     public List<Recipe> getServerRecipes() {
-        return null;
+        List<Recipe> recipes = Lists.newArrayList();
+
+        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
+            recipes.add(NeptuneRecipe.of((IRecipe) recipe));
+        }
+
+        return recipes;
     }
 
     @Override

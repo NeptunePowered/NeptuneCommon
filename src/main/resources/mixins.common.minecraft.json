@@ -13,6 +13,7 @@
         "entity.ai.attributes.MixinModifiableAttributeInstance",
         "entity.ai.attributes.MixinRangedAttribute",
         "entity.ai.MixinEntityAIBase",
+        "entity.ai.MixinEntityAITasks",
         "entity.effect.MixinEntityLightningBolt",
         "entity.effect.MixinEntityWeatherEffect",
         "entity.item.MixinEntityExpBottle",

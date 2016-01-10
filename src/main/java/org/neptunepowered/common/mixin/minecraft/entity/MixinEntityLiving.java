@@ -30,6 +30,7 @@ import net.canarymod.api.entity.living.LivingBase;
 import net.canarymod.api.inventory.Item;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
@@ -42,6 +43,8 @@ public abstract class MixinEntityLiving extends MixinEntityLivingBase implements
     @Shadow protected float[] equipmentDropChances;
     @Shadow private boolean persistenceRequired;
     @Shadow private ItemStack[] equipment;
+    @Shadow protected EntityAITasks tasks;
+    @Shadow protected EntityAITasks targetTasks;
 
     @Shadow
     public abstract EntityLivingBase shadow$getAttackTarget();
@@ -144,12 +147,12 @@ public abstract class MixinEntityLiving extends MixinEntityLivingBase implements
 
     @Override
     public AIManager getAITaskManager() {
-        return null;
+        return (AIManager) this.tasks;
     }
 
     @Override
     public AIManager getAITargetTaskManager() {
-        return null;
+        return (AIManager) this.targetTasks;
     }
 
     @Override

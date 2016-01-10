@@ -21,33 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.common;
+package org.neptunepowered.common.mixin.minecraft.entity.ai;
 
-import net.canarymod.Canary;
-import net.canarymod.chat.ChatFormat;
-import net.canarymod.chat.MessageReceiver;
-import net.canarymod.commandsys.Command;
-import net.canarymod.commandsys.CommandListener;
+import net.canarymod.api.ai.AIBase;
+import net.canarymod.api.ai.AIManager;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAITasks;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 
-public class NeptuneCommands implements CommandListener {
+@Mixin(EntityAITasks.class)
+public abstract class MixinEntityAITasks implements AIManager {
 
-    @Command(aliases = { "neptune" },
-            description = "Neptune command",
-            permissions = { "neptune.command.base" },
-            toolTip = "/neptune [info]")
-    public void baseCommand(MessageReceiver caller, String[] args) {
-        this.infoCommand(caller, args);
+    @Shadow
+    public abstract void addTask(int p_75776_1_, EntityAIBase p_75776_2_);
+
+    @Shadow
+    public abstract void removeTask(EntityAIBase p_85156_1_);
+
+    @Override
+    public boolean addTask(int priority, AIBase ai) {
+        this.addTask(priority, (EntityAIBase) ai);
+        return this.hasTask(ai.getClass());
     }
 
-    @Command(aliases = { "info" },
-            parent = "neptune",
-            description = "info subcommand",
-            permissions = { "neptune.command.info" },
-            toolTip = "/neptune info")
-    public void infoCommand(MessageReceiver caller, String[] args) {
-        caller.message(String.format("%s%s=== %s %s ===",
-                ChatFormat.BOLD, ChatFormat.BLUE, Canary.getImplementationTitle(), Canary.getImplementationVersion()));
-        caller.message("Website: https://www.neptunepowered.org/");
-        caller.message("Lead Developer: Jamie Mansfield");
+    @Override
+    public boolean removeTask(Class<? extends AIBase> ai) {
+        this.removeTask((EntityAIBase) this.getTask(ai));
+        return !this.hasTask(ai);
+    }
+
+    @Override
+    public boolean hasTask(Class<? extends AIBase> ai) {
+        return false;
+    }
+
+    @Override
+    public AIBase getTask(Class<? extends AIBase> ai) {
+        return null;
     }
 }
