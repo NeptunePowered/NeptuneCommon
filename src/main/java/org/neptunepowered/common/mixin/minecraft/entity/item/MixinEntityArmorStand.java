@@ -30,11 +30,19 @@ import net.canarymod.api.world.position.Rotations;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.item.ItemStack;
 import org.neptunepowered.common.mixin.minecraft.entity.MixinEntityLivingBase;
+import org.neptunepowered.common.util.converter.RotationsConverter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntityArmorStand.class)
 public abstract class MixinEntityArmorStand extends MixinEntityLivingBase implements ArmorStand {
+
+    @Shadow private net.minecraft.util.Rotations headRotation;
+    @Shadow private net.minecraft.util.Rotations bodyRotation;
+    @Shadow private net.minecraft.util.Rotations leftArmRotation;
+    @Shadow private net.minecraft.util.Rotations rightArmRotation;
+    @Shadow private net.minecraft.util.Rotations leftLegRotation;
+    @Shadow private net.minecraft.util.Rotations rightLegRotation;
 
     @Shadow
     public abstract ItemStack[] getInventory();
@@ -56,6 +64,24 @@ public abstract class MixinEntityArmorStand extends MixinEntityLivingBase implem
 
     @Shadow
     public abstract void setNoBasePlate(boolean p_175426_1_);
+
+    @Shadow
+    public abstract void setHeadRotation(net.minecraft.util.Rotations p_175415_1_);
+
+    @Shadow
+    public abstract void setBodyRotation(net.minecraft.util.Rotations p_175424_1_);
+
+    @Shadow
+    public abstract void setLeftArmRotation(net.minecraft.util.Rotations p_175405_1_);
+
+    @Shadow
+    public abstract void setRightArmRotation(net.minecraft.util.Rotations p_175428_1_);
+
+    @Shadow
+    public abstract void setLeftLegRotation(net.minecraft.util.Rotations p_175417_1_);
+
+    @Shadow
+    public abstract void setRightLegRotation(net.minecraft.util.Rotations p_175427_1_);
 
     @Override
     public Item[] getAllEquipment() {
@@ -131,12 +157,45 @@ public abstract class MixinEntityArmorStand extends MixinEntityLivingBase implem
 
     @Override
     public Rotations getPartPose(RotatablePart part) {
-        return null;
+        switch (part) {
+            case HEAD:
+                return RotationsConverter.of(this.headRotation);
+            case BODY:
+                return RotationsConverter.of(this.bodyRotation);
+            case LEFTARM:
+                return RotationsConverter.of(this.leftArmRotation);
+            case RIGHTARM:
+                return RotationsConverter.of(this.rightArmRotation);
+            case LEFTLEG:
+                return RotationsConverter.of(this.leftLegRotation);
+            case RIGHTLEG:
+                return RotationsConverter.of(this.rightLegRotation);
+        }
+        return new Rotations(0, 0, 0);
     }
 
     @Override
     public void setPartPose(RotatablePart part, Rotations rotation) {
-
+        switch (part) {
+            case HEAD:
+                this.setHeadRotation(RotationsConverter.of(rotation));
+                break;
+            case BODY:
+                this.setBodyRotation(RotationsConverter.of(rotation));
+                break;
+            case LEFTARM:
+                this.setLeftArmRotation(RotationsConverter.of(rotation));
+                break;
+            case RIGHTARM:
+                this.setRightArmRotation(RotationsConverter.of(rotation));
+                break;
+            case LEFTLEG:
+                this.setLeftLegRotation(RotationsConverter.of(rotation));
+                break;
+            case RIGHTLEG:
+                this.setRightLegRotation(RotationsConverter.of(rotation));
+                break;
+        }
     }
 
     @Override
