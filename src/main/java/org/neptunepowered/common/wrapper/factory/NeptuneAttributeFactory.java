@@ -28,6 +28,8 @@ import net.canarymod.api.attributes.Attribute;
 import net.canarymod.api.factory.AttributeFactory;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityHorse;
 
 import java.util.Map;
 
@@ -35,7 +37,7 @@ public class NeptuneAttributeFactory implements AttributeFactory {
 
     private static Map<String, IAttribute> map = Maps.newHashMap();
 
-    public NeptuneAttributeFactory() {
+    static {
         map.put(SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName(),
                 SharedMonsterAttributes.maxHealth);
         map.put(SharedMonsterAttributes.followRange.getAttributeUnlocalizedName(),
@@ -46,7 +48,15 @@ public class NeptuneAttributeFactory implements AttributeFactory {
                 SharedMonsterAttributes.movementSpeed);
         map.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
                 SharedMonsterAttributes.attackDamage);
+
+        map.put(EntityZombie.reinforcementChance.getAttributeUnlocalizedName(),
+                EntityZombie.reinforcementChance);
+
+        map.put(EntityHorse.horseJumpStrength.getAttributeUnlocalizedName(),
+                EntityHorse.horseJumpStrength);
     }
+
+    protected NeptuneAttributeFactory() {}
 
     @Override
     public Attribute getGenericAttribute(String nativeName) {

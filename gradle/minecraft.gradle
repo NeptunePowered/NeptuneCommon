@@ -12,8 +12,12 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        name 'neptune-temp'
-        url 'http://www.neptunepowered.org/temprepo/'
+        name = 'vi-repo'
+        url = 'http://repo.visualillusionsent.net/repository/internal/'
+    }
+    maven {
+        name = 'vi-snapshots'
+        url = 'http://repo.visualillusionsent.net/repository/snapshots/'
     }
     maven {
         name = 'mcstats.org releases'

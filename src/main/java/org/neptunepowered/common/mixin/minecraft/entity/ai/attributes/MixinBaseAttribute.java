@@ -53,7 +53,6 @@ public abstract class MixinBaseAttribute implements Attribute {
 
     @Override
     public Attribute setShouldWatch(boolean watch) {
-        shadow$setShouldWatch(watch);
-        return this;
+        return (Attribute) shadow$setShouldWatch(watch);
     }
 }
